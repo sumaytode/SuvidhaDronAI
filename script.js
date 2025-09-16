@@ -75,7 +75,7 @@ gsap.from("#hero p", {
   delay: 0.3,
 });
 gsap.from("#hero .btn", {
-  opacity: 0,
+  opacity: 1,
   scale: 0.8,
   duration: 1,
   delay: 0.6,
@@ -199,3 +199,4 @@ ScrollTrigger.create({
     animateValue("student-count1", 0, 20000, 1000);
   }
 });
+
