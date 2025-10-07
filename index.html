@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Navbar — Toggle Fixed</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+  body {
+    font-family: "Poppins", sans-serif;
+    }
+  * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    }
+    body { 
+      font-family: Arial, sans-serif; 
+    }
+
+    /* Navbar */
+    nav {
+        position: fixed;   /* 👈 stays at the top */
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #d9d9d9b9;
+        color: #3015D9;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        z-index: 1000;     /* keep it above other elements */
+      }
+
+    .logo { 
+        font-weight: 700;
+        font-size: 25px; 
+    }
+
+    /* Button (hamburger) */
+    .menu-toggle {
+      display: none;                 /* visible only on small screens */
+      background: none;
+      border: 0;
+      color: inherit;
+      font-size: 26px;
+      cursor: pointer;
+      padding: 6px;
+    }
+
+    /* Menu (desktop) */
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+    nav ul li a {
+      color: #020202;
+      text-decoration: none;
+      transition: color .18s;
+    }
+    nav ul li a:hover { color: #ff9800; }
+
+    /* Mobile: collapse menu and show button */
+    @media (max-width: 768px) {
+      .menu-toggle { 
+        display: block; }
+
+      nav ul {
+        display: none;              /* hidden by default on mobile */
+        flex-direction: column;
+        position: absolute;
+        top: 100%;                  /* just below the nav */
+        right: 12px;
+        width: 220px;
+        background: #D9D9D9;
+        padding: 10px;
+        border-radius: 6px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      }
+
+      nav ul.show { 
+        display: flex; } /* when .show is added by JS */
+
+      nav ul li { 
+        margin: 8px 0; }
+    }
+
+    /* visually-hidden (for screen readers) */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Video full background */
+    #page1 {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    /* Slider Container */
+    .slider-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    /* Individual Slide */
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Navigation Arrows */
+    .slider-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 10;
+    }
+
+    .slider-btn {
+      background: rgba(255, 255, 255, 0.3);
+      border: none;
+      color: white;
+      font-size: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+
+    .slider-btn:hover {
+      background: rgba(255, 152, 0, 0.8);
+      transform: scale(1.1);
+    }
+
+    /* Slider Dots */
+    .slider-dots {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 10;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .dot.active {
+      background: gold;
+      border-color: white;
+      transform: scale(1.3);
+    }
+
+    /* Hero Content */
+    #hero {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 5vw;
+      z-index: 5;
+    }
+
+
+    @media (max-width: 600px) {
+      #hero h1 {
+        font-size: 7vw;
+        width: 90%;
+      }
+
+      #hero p {
+        font-size: 4vw;
+        width: 90%;
+      }
+
+      #hero a {
+        font-size: 4vw;
+        padding: 8px 16px;
+      }
+
+      .slider-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+      }
+    }
+
+
+    /* Main container */
+    #page2 {
+      height: 100vh;
+      width: 100%;
+      background-color: #fff;
+      position: relative;
+      padding: 3vw 4.5vw;
+      display: flex;
+      align-items: center;
+      border-top: 1px solid #fff;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap; /* allows stacking on smaller screens */
+    }
+
+    /* Left side */
+    #page2-left {
+      flex: 1 1 40%;
+      min-width: 300px;
+      background-color: #fff;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-direction: column;
+      padding: 2vw 0;
+    }
+
+    #page2-left h1 {
+      font-size: 2.2vw;
+      font-weight: 600;
+      color: #111;
+    }
+
+    #page2-left p {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: #111;
+      line-height: 1.5;
+      margin-top: 1vw;
+    }
+
+    /* Right side */
+    #page2-right {
+      flex: 1 1 55%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #fff;
+      border-radius: 10px;
+      padding: 1rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .box {
+      height: 35vh;
+      border-radius: 15px;
+      width: 100%;
+      background: rgb(236, 236, 236);
+      box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+        rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+        rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: #fff;
+      transition: transform 0.3s;
+    }
+
+    .box i{
+      font-size: 8vh;
+      color: #ffd900;
+    }
+
+    .box h3{
+      font-size:4vh;
+    }
+
+    .box p{
+      font-size:2vh;
+    }
+
+    /* ---------------- RESPONSIVENESS ---------------- */
+    @media (max-width: 1024px) {
+      #page2 {
+        flex-direction: column;
+        height: auto;
+      }
+
+      #page2-left,
+      #page2-right {
+        width: 100%;
+      }
+
+      #page2-left h1 {
+        font-size: 1.8rem;
+      }
+
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      #page2-left h1 {
+        font-size: 1.6rem;
+      }
+
+      #page2-left p {
+        font-size: 1rem;
+      }
+
+      .grid {
+        grid-template-columns: 1fr; /* 1 column on tablets/mobiles */
+      }
+
+      .box {
+        height: 30vh;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #page2 {
+        padding: 2rem 1rem;
+      }
+
+      #page2-left h1 {
+        font-size: 1.4rem;
+      }
+
+      #page2-left p {
+        font-size: 0.95rem;
+      }
+
+      .box {
+        height: 25vh;
+      }
+    }
+
+
+    #page3 {
+      width: 100%;
+      min-height: 100vh;   /* instead of fixed height */
+      background-color: #fcf59c;
+      position: relative;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      border-top: 1px solid #fff;
+      justify-content: center;   /* keep cards centered */
+      padding: 5vh 5vw;          /* spacing from top/bottom */
+      box-sizing: border-box;
+    }
+
+    #page3-text {
+      text-align: center;
+      margin-bottom: 40px; /* space between text and cards */
+    }
+
+    #page3-text h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #111;
+    }
+
+    #page3-text p {
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: #333;
+    }
+
+    .card-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: stretch;
+      flex-wrap: wrap;
+      gap: 20px;
+      width: 100%;
+      max-width: 1200px;   /* keeps cards aligned within content area */
+    }
+
+
+    /* Card styling */
+    .card {
+      flex: 1 1 28%;     /* flexible width, around 30% */
+      max-width: 350px;  /* limit max size */
+      min-width: 250px;  /* keep cards readable */
+      height: 50vh;      /* responsive height */
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.2s ease-in-out;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* New Course Card Styles */
+    .course-card {
+      position: relative;
+      width: 580px;
+      max-width: 90%;
+      margin: 0 auto;
+      background:#fffbc3;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: floatCard 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatCard {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+
+    .course-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .course-image {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .course-content {
+      padding: 25px;
+      text-align: center;
+    }
+
+    .course-content h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin: 10px 0;
+      color: #7205a5;
+    }
+
+    .course-content p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #3f005c9f;
+      margin-bottom: 20px;
+    }
+
+    .course-btn {
+      display: inline-block;
+      background: #9301d6;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      box-shadow: 0 0 10px rgba(0, 114, 255, 0.5);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .course-btn:hover {
+      box-shadow: 0 0 25px rgba(0, 114, 255, 0.9);
+      background: linear-gradient(135deg, #0072ff, #00c6ff);
+    }
+
+    .glow-border {
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      padding: 2px;
+      background: #ff9800;
+      -webkit-mask: linear-gradient(#000000 0 0) content-box, linear-gradient(#cf0a0a 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: glowMove 4s linear infinite;
+    }
+
+    @keyframes glowMove {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    /* Responsive: stack cards on small screens */
+    @media (max-width: 900px) {
+      .card-container {
+        justify-content: center;
+      }
+      .card {
+        flex: 1 1 80%;  /* each card takes most of page */
+        max-width: 500px;
+        height: auto;   /* let height adjust */
+      }
+    }
+
+    #page4 {
+      text-align: center;
+      background-color: #fff;
+      padding: 50px 20px;
+    }
+
+    #page4 h2 {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeSlideDown 1s ease forwards;
+    }
+
+    #page4 p {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeSlideDown 1s ease forwards;
+      animation-delay: 0.3s;
+    }
+
+    .mentor-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .mentor-card {
+      background: #fff;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: left;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeUp 1s ease forwards;
+    }
+
+    .mentor-card:nth-child(1) { animation-delay: 0.3s; }
+    .mentor-card:nth-child(2) { animation-delay: 0.5s; }
+    .mentor-card:nth-child(3) { animation-delay: 0.7s; }
+    .mentor-card:nth-child(4) { animation-delay: 0.9s; }
+
+    .mentor-card:hover {
+      transform: translateY(-12px) scale(1.05);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+    }
+
+    .mentor-card img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .mentor-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .mentor-info {
+      padding: 15px 20px;
+      transition: background 0.3s ease;
+    }
+
+    .mentor-card:hover .mentor-info {
+      background: linear-gradient(135deg, #f8f8f8, #eaf1ff);
+    }
+
+    .mentor-info h3 {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #222;
+      transition: color 0.3s ease;
+    }
+
+    .mentor-card:hover .mentor-info h3 {
+      color: #e68900;
+    }
+
+    .mentor-info p {
+      font-size: 14px;
+      color: #555;
+      margin: 0;
+    }
+
+    /* === Animations === */
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(40px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeSlideDown {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+
+    #page5 {
+      width: 100%;
+      min-height: 100vh;
+      padding: 50px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      perspective: 300px;
+      background: #fcf59c;
+    }
+
+    .marquee3d {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      width: 100%;
+      max-width: 1300px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .marquee-column {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      animation: scroll 20s linear infinite;
+    }
+
+    .marquee-column.reverse {
+      animation-direction: reverse;
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-50%);
+      }
+    }
+
+    .review-card {
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,0.1);
+      padding: 15px;
+      width: 220px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .review-card:hover {
+      background: rgba(0,0,0,0.05);
+      transform: translateY(-5px);
+    }
+
+    .review-card img {
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      margin-right: 10px;
+    }
+
+    .review-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .review-header h4 {
+      font-size: 14px;
+      margin: 0;
+      font-weight: bold;
+    }
+
+    .review-header p {
+      font-size: 12px;
+      margin: 0;
+      color: gray;
+    }
+
+    .review-body {
+      font-size: 13px;
+      margin-top: 8px;
+      color: #333;
+    }
+
+    /* Gradient fade edges */
+    .fade-top, .fade-bottom {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 80px;
+      pointer-events: none;
+      z-index: 5;
+    }
+    .fade-top {
+      top: 0;
+      background: linear-gradient(to bottom, #f9f9f9, transparent);
+    }
+    .fade-bottom {
+      bottom: 0;
+      background: linear-gradient(to top, #ffffff, transparent);
+    }
+
+    /* Page 6 Section */
+    #page6 {
+      text-align: center;
+      background-color: #fff;
+      padding: 50px 20px;
+    }
+
+    #page6 h2 {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeSlideDown 1s ease forwards;
+    }
+
+    #page6 p {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeSlideDown 1s ease forwards;
+      animation-delay: 0.3s;
+    }
+    /* Stats Container */
+    .stats-container {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+
+    /* Individual Stats Box */
+    .stats-box {
+      background: #fff;
+      border-radius: 12px;
+      padding: 30px 50px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      min-width: 220px;
+    }
+
+    .stats-box:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    /* Number Styling */
+    .stats-box span {
+      font-size: 40px;
+      font-weight: bold;
+      color: #9301d6; /* blue highlight */
+    }
+
+    .stats-box .plus {
+      font-size: 40px;
+      font-weight: bold;
+      color: #e68900;
+      margin-left: 3px;
+    }
+
+    /* Text under numbers */
+    .stats-box p {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #444;
+      font-weight: 500;
+    }
+
+    /* Footer Styles */
+    #footer {
+      background: #5e008a;
+      color: #ffffff;
+      padding: 50px 20px 20px;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 10px;
+    }
+
+    .footer-col {
+      flex: 1 1 200px;
+    }
+
+    .footer-col h3 {
+      font-size: 22px;
+      color: #fff;
+      margin-bottom: 15px;
+    }
+
+    .footer-col h4 {
+      font-size: 18px;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .footer-col p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #ccc;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-col ul li a {
+      text-decoration: none;
+      color: #ddd;
+      transition: color 0.3s;
+    }
+
+    .footer-col ul li a:hover {
+      color: #855000;
+    }
+
+    /* Social Links */
+    .social-links a {
+      display: inline-block;
+      margin-right: 10px;
+      font-size: 18px;
+      color: #ddd;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .social-links a:hover {
+      color: #002b58;
+      transform: translateY(-3px);
+    }
+
+    /* Bottom Bar */
+    .footer-bottom {
+      text-align: center;
+      margin-top: 30px;
+      border-top: 1px solid #444;
+      padding-top: 15px;
+    }
+
+    .footer-bottom p {
+      font-size: 14px;
+      color: #bbb;
+    }
+
+</style>
+
+</head>
+<body>
+  <nav>
+    <a href="index.html"  class="flex items-center flex-shrink-0 page-link" data-page="home">
+      <img src="https://i.ibb.co/DPxTrnv2/Dron-AILogo-1.png" alt="DronAI Logo" class="h-12">
+  </a>
+
+    <!-- accessible button instead of span/onclick -->
+    <button class="menu-toggle"
+            aria-controls="menu"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+      ☰
+    </button>
+
+    <ul id="menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="program.html" >Course</a></li>
+      <li><a href="#blog">Mentors</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div id="main">
+    <div id="page1">
+      <!-- Image Slider Container -->
+      <div class="slider-container">
+        <!-- Slide 1 - ADD YOUR IMAGE PATH HERE -->
+        <div class="slide active">
+          <img src="c:\Users\Sumay\Desktop\Dron AI\Free (1).jpg" alt="Slide 1">
+        </div>
+
+        <!-- Slide 2 - ADD YOUR IMAGE PATH HERE -->
+        <div class="slide">
+          <img src="c:\Users\Sumay\Desktop\Dron AI\Free.jpg" alt="Slide 2">
+        </div>
+
+        <!-- Slide 3 - ADD YOUR IMAGE PATH HERE -->
+        <div class="slide">
+          <img src="c:\Users\Sumay\Desktop\Dron AI\1.png" alt="Slide 3">
+        </div>
+
+        <!-- Slide 4 - ADD YOUR IMAGE PATH HERE -->
+        <div class="slide">
+          <img src="c:\Users\Sumay\Desktop\Dron AI\2.png" alt="Slide 4">
+        </div>
+
+        <!-- ADD MORE SLIDES HERE IF NEEDED -->
+        <!-- 
+        <div class="slide">
+          <img src="YOUR_IMAGE_PATH_HERE" alt="Slide 5">
+        </div>
+        -->
+      </div>
+
+      <!-- Navigation Arrows -->
+      <div class="slider-nav">
+        <button class="slider-btn prev-btn" aria-label="Previous Slide">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="slider-btn next-btn" aria-label="Next Slide">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <!-- Slider Dots -->
+      <div class="slider-dots">
+        <span class="dot active" data-slide="0"></span>
+        <span class="dot" data-slide="1"></span>
+        <span class="dot" data-slide="2"></span>
+        <span class="dot" data-slide="3"></span>
+        <!-- ADD MORE DOTS IF YOU ADD MORE SLIDES -->
+      </div>
+
+      <!-- Hero Content -->
+      
+    </div>
+  </div>
+    
+    <div id="page2">
+      <div id="page2-left">
+        <h1>About Suvidha Foundation</h1>
+        <p>
+          Suvidha Foundation is a non-profit organization dedicated to empowering
+          youth through technology education. Our DronAI program represents the
+          future of artificial intelligence and deep learning education, designed
+          to bridge the gap between academic learning and industry requirements.
+        </p>
+        <p>
+          We believe in creating opportunities for every individual to excel in the
+          rapidly evolving tech landscape. Through our comprehensive programs,
+          we've successfully trained thousands of students and professionals,
+          helping them secure positions in top-tier companies worldwide.
+        </p>
+      </div>
+    
+      <div id="page2-right">
+        <div class="grid">
+          <div class="box">
+            <i class="fas fa-medal"></i>
+            <h3>100% Placement</h3>
+            <p>Guaranteed job placement with top companies</p>
+          </div>
+          <div class="box">
+            <i class="fa-solid fa-user-graduate"></i>
+            <h3>Mentorship </h3>
+            <p>Personal guidance from industry professionals</p>
+          </div>
+          <div class="box">
+            <i class="fa-solid fa-globe"></i>
+            <h3>Global Network</h3>
+            <p>Connect with professionals worldwide</p>
+          </div>
+          <div class="box">
+            <i class="fa-solid fa-users"></i>
+            <h3>Mentorship</h3>
+            <p>Personal guidance from industry professionals</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="page3">
+      <div id="page3-text">
+        <h1>Our Course</h1>
+        <p>Master the latest technologies with our expert-led courses</p>
+      </div>
+      <div class="card-container">
+        <div class="course-card">
+          <div class="glow-border"></div>
+          <img 
+            src="coursse2.jpg"
+            alt="Artificial Intelligence Course"
+            class="course-image"
+          />
+          <div class="course-content">
+            <h2>Artificial Intelligence & Deep Learning</h2>
+            <p>
+              Step into the future of technology with our AI & Deep Learning course. 
+              Master neural networks, machine learning models, and intelligent algorithms 
+              through hands-on projects using Python and TensorFlow.
+            </p>
+            <a href="#" class="course-btn">Explore Course</a>
+          </div>
+        </div>
+      </div>
+      <div class="fade-top"></div>
+      <div class="fade-bottom"></div>
+    </div>
+
+    <div id="page4">
+      <h2>Our Expert Mentors</h2>
+      <p>Learn from industry leaders and AI pioneers</p>
+    
+      <div class="mentor-container">
+        <div class="mentor-card">
+          <img src="person1.jpg" alt="Mentor 1">
+          <div class="mentor-info">
+            <h3>Dr. Emily Watson</h3>
+            <p>AI Research Director at Google</p>
+          </div>
+        </div>
+    
+        <div class="mentor-card">
+          <img src="person2.jpg" alt="Mentor 2">
+          <div class="mentor-info">
+            <h3>James Mitchell</h3>
+            <p>ML Engineer at Tesla</p>
+          </div>
+        </div>
+    
+        <div class="mentor-card">
+          <img src="person3.jpg" alt="Mentor 3">
+          <div class="mentor-info">
+            <h3>Priya Sharma</h3>
+            <p>Data Scientist at Microsoft</p>
+          </div>
+        </div>
+    
+        <div class="mentor-card">
+          <img src="person4.jpg" alt="Mentor 4">
+          <div class="mentor-info">
+            <h3>David Kim</h3>
+            <p>AI Architect at Amazon</p>
+          </div>
+        </div>
+      </div>
+    </div>    
+
+    <div id="page5">
+      <div class="marquee3d">
+        <!-- Column 1 -->
+        <div class="marquee-column">
+          <div class="review-card">
+            <div class="review-header">
+              <img src="https://avatar.vercel.sh/jack" alt="">
+              <div>
+                <h4>Ned Stark</h4>
+                <p>@nedstark</p>
+              </div>
+            </div>
+            <div class="review-body">
+              he courses are beginner-friendly and easy to follow
+            </div>
+          </div>
+  
+          <div class="review-card">
+            <div class="review-header">
+              <img src="https://avatar.vercel.sh/jill" alt="">
+              <div>
+                <h4>Robb Stark</h4>
+                <p>@robbstark</p>
+              </div>
+            </div>
+            <div class="review-body">
+              I gained practical skills that I could apply immediately
+            </div>
+          </div>
+  
+          <div class="review-card">
+            <div class="review-header">
+              <img src="https://avatar.vercel.sh/john" alt="">
+              <div>
+                <h4>John Show</h4>
+                <p>@johnshow</p>
+              </div>
+            </div>
+            <div class="review-body">
+              Great mentors who explain concepts clearly.
+            </div>
+          </div>
+        </div>
+  
+        <!-- Column 2 -->
+        <div class="marquee-column reverse">
+          <div class="review-card">
+            <div class="review-header">
+              <img src="https://avatar.vercel.sh/jill" alt="">
+              <div>
+                <h4>Arya Stark</h4>
+                <p>@aryastark</p>
+              </div>
+            </div>
+            <div class="review-body">
+              I don't know what to say. I'm speechless. This is amazing.
+            </div>
+          </div>
+  
+          <div class="review-card">
+            <div class="review-header">
+              <img src="https://avatar.vercel.sh/jack" alt="">
+              <div>
+                <h4>Lady Stark</h4>
+                <p>@ladystark</p>
+              </div>
+            </div>
+            <div class="review-body">
+              I've never seen anything like this before. It's amazing. I love it.
+            </div>
+          </div>
+  
+          <div class="review-card">
+            <div class="review-header">
+              <img src="https://avatar.vercel.sh/john" alt="">
+              <div>
+                <h4>Tywin Lannister</h4>
+                <p>@tywinlannister</p>
+              </div>
+            </div>
+            <div class="review-body">
+              I'm at a loss for words. This is amazing. I love it.
+            </div>
+          </div>
+        </div>
+  
+        <!-- Column 3 -->
+        <div class="marquee-column">
+          <div class="review-card">
+            <div class="review-header">
+              <img src="https://avatar.vercel.sh/john" alt="">
+              <div>
+                <h4>Tyrion Lannister</h4>
+                <p>@tyrionlannister</p>
+              </div>
+            </div>
+            <div class="review-body">
+              I'm at a loss for words. This is amazing. I love it.
+            </div>
+          </div>
+  
+          <div class="review-card">
+            <div class="review-header">
+              <img src="https://avatar.vercel.sh/jack" alt="">
+              <div>
+                <h4>Sansa Stark</h4>
+                <p>@sansastark</p>
+              </div>
+            </div>
+            <div class="review-body">
+              I've never seen anything like this before. It's amazing. I love it.
+            </div>
+          </div>
+  
+          <div class="review-card">
+            <div class="review-header">
+              <img src="https://avatar.vercel.sh/jill" alt="">
+              <div>
+                <h4>Ramsey Bolton</h4>
+                <p>@ramseybolton</p>
+              </div>
+            </div>
+            <div class="review-body">
+              I don't know what to say. I'm speechless. This is amazing.
+            </div>
+          </div>
+        </div>
+  
+        <!-- Column 4 -->
+        <div class="marquee-column reverse">
+          <div class="review-card">
+            <div class="review-header">
+              <img src="https://avatar.vercel.sh/jack" alt="">
+              <div>
+                <h4>Bran Stark</h4>
+                <p>@branstark</p>
+              </div>
+            </div>
+            <div class="review-body">
+              I've never seen anything like this before. It's amazing. I love it.
+            </div>
+          </div>
+  
+          <div class="review-card">
+            <div class="review-header">
+              <img src="https://avatar.vercel.sh/jill" alt="">
+              <div>
+                <h4>Hodor</h4>
+                <p>@hodor</p>
+              </div>
+            </div>
+            <div class="review-body">
+              I don't know what to say. I'm speechless. This is amazing.
+            </div>
+          </div>
+  
+          <div class="review-card">
+            <div class="review-header">
+              <img src="https://avatar.vercel.sh/john" alt="">
+              <div>
+                <h4>jaime Lannister</h4>
+                <p>@jaimelannister</p>
+              </div>
+            </div>
+            <div class="review-body">
+              I'm at a loss for words. This is amazing. I love it.
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Fading edges -->
+      <div class="fade-top"></div>
+      <div class="fade-bottom"></div>
+    </div>
+
+    <div id="page6">
+      <h2>Our Success Stories</h2>
+      <p>Students placed in top companies</p>
+      <div class="stats-container">
+        <div class="stats-box">
+          <span id="student-count">0</span><span class="plus">+</span>
+          <p>Students Placement</p>
+        </div>
+    
+        <div class="stats-box">
+          <span id="student-count1">0</span><span class="plus">+</span>
+          <p>Students Internship</p>
+        </div>
+      </div>
+    </div>
+    
+    <footer id="footer">
+      <div class="footer-container">
+        <!-- Column 1 - Brand -->
+        <div class="footer-col">
+          <h3>DronAI</h3>
+          <p>Empowering the next generation of AI innovators. An initiative by Suvidha Foundation.</p>
+        </div>
+    
+        <!-- Column 2 - Quick Links -->
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="program.html">Course</a></li>
+            <li><a href="#blog">Career</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+    
+        <!-- Column 3 - Contact Info -->
+        <div class="footer-col">
+          <h4>Contact Info</h4>
+          <address>
+            <p><i class="fas fa-map-marker-alt"></i> Nagpur, Maharashtra, India</p>
+            <p><i class="fas fa-envelope"></i> contact@suvidhafoundation.org</p>
+          </address>
+        </div>
+    
+        <!-- Column 4 - Newsletter -->
+        <div class="footer-col">
+          <h4>Our Newsletter</h4>
+          <p class="newsletter-text">Subscribe to our newsletter to get our latest updates.</p>
+          <form action="#" class="newsletter-form">
+            <input type="email" placeholder="Email address" required>
+            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+          </form>
+        </div>
+    
+        <!-- Column 5 - Social Links -->
+        <div class="footer-col">
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="https://www.facebook.com/suvidhamahilamandal" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://in.linkedin.com/company/suvidha-foundation" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/suvidha_mahila_mandal/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    
+      <div class="footer-bottom">
+        <p>&copy; 2025 Dronacharya School of AI. All Rights Reserved.</p>
+      </div>
+    </footer>
+  </div>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+  (function () {
+    const nav = document.querySelector('nav');
+    const toggle = nav.querySelector('.menu-toggle');
+    const menu = nav.querySelector('#menu');
+
+    if (!toggle || !menu) {
+      console.error('Menu toggle or menu element not found');
+      return;
+    }
+
+    // Toggle menu on button click
+    toggle.addEventListener('click', function (e) {
+      const isOpen = menu.classList.toggle('show');
+      // update accessibility attribute
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    // Close when any menu link is clicked (useful for single page)
+    menu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        if (menu.classList.contains('show')) {
+          menu.classList.remove('show');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
+    // Close when clicking outside the nav (mobile)
+    document.addEventListener('click', (evt) => {
+      if (!nav.contains(evt.target) && menu.classList.contains('show')) {
+        menu.classList.remove('show');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Optional: close menu on ESC key
+    document.addEventListener('keydown', (evt) => {
+      if (evt.key === 'Escape' && menu.classList.contains('show')) {
+        menu.classList.remove('show');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
+
+  function animateValue(id, start, end, duration) {
+    const obj = document.getElementById(id);
+    let startTimestamp = null;
+  
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      obj.innerText = Math.floor(progress * (end - start) + start).toLocaleString();
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+  
+    window.requestAnimationFrame(step);
+  }
+
+  // Register ScrollTrigger
+gsap.registerPlugin(ScrollTrigger);
+
+// Hero section animation
+gsap.from("#hero h1", {
+  opacity: 0,
+  y: 50,
+  duration: 1,
+  ease: "power2.out",
+});
+gsap.from("#hero p", {
+  opacity: 0,
+  y: 30,
+  duration: 1,
+  delay: 0.3,
+});
+gsap.from("#hero .btn", {
+  opacity: 0,
+  scale: 0.8,
+  duration: 1,
+  delay: 0.6,
+});
+
+// Page2 (About + Boxes)
+gsap.from("#page2-left h1, #page2-left p", {
+  scrollTrigger: {
+    trigger: "#page2",
+    start: "top 70%",
+  },
+  opacity: 0,
+  x: -50,
+  duration: 1,
+  stagger: 0.3,
+});
+
+gsap.from("#page2-right .box", {
+  scrollTrigger: {
+    trigger: "#page2",
+    start: "top 70%",
+  },
+  opacity: 0,
+  y: 50,
+  duration: 1,
+  stagger: 0.2,
+});
+
+// Page3 (Courses cards)
+gsap.from("#page3 .card", {
+  scrollTrigger: {
+    trigger: "#page3",
+    start: "top 70%",
+  },
+  opacity: 0,
+  y: 50,
+  duration: 1,
+  stagger: 0.3,
+});
+
+// Page4 (Mentors)
+gsap.from("#page4 h2, #page4 p", {
+  scrollTrigger: {
+    trigger: "#page4",
+    start: "top 70%",
+  },
+  opacity: 0,
+  y: 40,
+  duration: 1,
+  stagger: 0.2,
+});
+
+gsap.from(".mentor-card", {
+  scrollTrigger: {
+    trigger: "#page4",
+    start: "top 65%",
+  },
+  opacity: 0,
+  scale: 0.8,
+  duration: 1,
+  stagger: 0.3,
+});
+
+// Page5 (Reviews marquee)
+gsap.from("#page5 .review-card", {
+  scrollTrigger: {
+    trigger: "#page5",
+    start: "top 70%",
+  },
+  opacity: 0,
+  y: 40,
+  duration: 1,
+  stagger: 0.2,
+});
+
+// Page6 (Success Stories - counters)
+gsap.from("#page6 h2, #page6 p", {
+  scrollTrigger: {
+    trigger: "#page6",
+    start: "top 70%",
+  },
+  opacity: 0,
+  y: 30,
+  duration: 1,
+  stagger: 0.2,
+});
+
+gsap.from("#page6 .stats-box", {
+  scrollTrigger: {
+    trigger: "#page6",
+    start: "top 70%",
+  },
+  opacity: 0,
+  scale: 0.8,
+  duration: 1,
+  stagger: 0.3,
+});
+
+// Footer
+gsap.from("#footer .footer-col", {
+  scrollTrigger: {
+    trigger: "#footer",
+    start: "top 80%",
+  },
+  opacity: 0,
+  y: 50,
+  duration: 1,
+  stagger: 0.3,
+});
+
+// Animate student placement count
+ScrollTrigger.create({
+  trigger: "#page6",
+  start: "top 80%",
+  onEnter: () => {
+    animateValue("student-count", 0, 100000, 1000);
+    animateValue("student-count1", 0, 20000, 1000);
+  },
+  onEnterBack: () => {
+    animateValue("student-count", 0, 100000, 1000);
+    animateValue("student-count1", 0, 20000, 1000);
+  }
+});
+
+// ============ IMAGE SLIDER FUNCTIONALITY ============
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
+const prevBtn = document.querySelector('.prev-btn');
+const nextBtn = document.querySelector('.next-btn');
+
+let currentSlide = 0;
+const totalSlides = slides.length;
+
+// Function to show specific slide
+function showSlide(n) {
+  // Remove active class from all slides and dots
+  slides.forEach(slide => slide.classList.remove('active'));
+  dots.forEach(dot => dot.classList.remove('active'));
+
+  // Handle wrap around
+  if (n >= totalSlides) {
+    currentSlide = 0;
+  } else if (n < 0) {
+    currentSlide = totalSlides - 1;
+  } else {
+    currentSlide = n;
+  }
+
+  // Add active class to current slide and dot
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].classList.add('active');
+}
+
+// Next slide
+function nextSlide() {
+  showSlide(currentSlide + 1);
+}
+
+// Previous slide
+function prevSlide() {
+  showSlide(currentSlide - 1);
+}
+
+// Event listeners for navigation buttons
+nextBtn.addEventListener('click', nextSlide);
+prevBtn.addEventListener('click', prevSlide);
+
+// Event listeners for dots
+dots.forEach((dot, index) => {
+  dot.addEventListener('click', () => {
+    showSlide(index);
+  });
+});
+
+// Auto slide every 5 seconds
+let autoSlideInterval = setInterval(nextSlide, 5000);
+
+// Pause auto slide on hover
+const sliderContainer = document.querySelector('.slider-container');
+sliderContainer.addEventListener('mouseenter', () => {
+  clearInterval(autoSlideInterval);
+});
+
+sliderContainer.addEventListener('mouseleave', () => {
+  autoSlideInterval = setInterval(nextSlide, 5000);
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowLeft') {
+    prevSlide();
+  } else if (e.key === 'ArrowRight') {
+    nextSlide();
+  }
+});
+
+</script>
+</body>
+</html>

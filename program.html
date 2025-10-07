@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI & Deep Learning Course - DronAI</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+    
+    /* Navbar */
+    nav {
+        position: fixed;   /* 👈 stays at the top */
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #d9d9d9b9;
+        color: #3015D9;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        z-index: 1000;     /* keep it above other elements */
+      }
+
+    .logo { 
+        font-weight: 700;
+        font-size: 25px; 
+    }
+
+    /* Button (hamburger) */
+    .menu-toggle {
+      display: none;                 /* visible only on small screens */
+      background: none;
+      border: 0;
+      color: inherit;
+      font-size: 26px;
+      cursor: pointer;
+      padding: 6px;
+    }
+
+    /* Menu (desktop) */
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+    nav ul li a {
+      color: #020202;
+      text-decoration: none;
+      transition: color .18s;
+    }
+    nav ul li a:hover { color: #ff9800; }
+
+    /* Mobile: collapse menu and show button */
+    @media (max-width: 768px) {
+      .menu-toggle { 
+        display: block; }
+
+      nav ul {
+        display: none;              /* hidden by default on mobile */
+        flex-direction: column;
+        position: absolute;
+        top: 100%;                  /* just below the nav */
+        right: 12px;
+        width: 220px;
+        background: #D9D9D9;
+        padding: 10px;
+        border-radius: 6px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      }
+
+      nav ul.show { 
+        display: flex; } /* when .show is added by JS */
+
+      nav ul li { 
+        margin: 8px 0; }
+    }
+
+    /* visually-hidden (for screen readers) */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Page Heading Section */
+    .page-heading {
+      background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+      padding: 100px 20px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-heading::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".1" fill="%23ffffff"/></svg>') repeat-x;
+      background-size: cover;
+      opacity: 0.1;
+    }
+
+    .flagship-badge {
+      display: inline-block;
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50px;
+      color: white;
+      font-size: 14px;
+      font-weight: 500;
+      backdrop-filter: blur(10px);
+      margin-bottom: 20px;
+    }
+
+    .flagship-badge i {
+      margin-right: 8px;
+    }
+
+    .page-heading h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .page-heading p {
+      font-size: 1.25rem;
+      color: #d1d5db;
+      max-width: 800px;
+      margin: 0 auto 40px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 16px 32px;
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+      color: #1f2937;
+      font-weight: 600;
+      border-radius: 50px;
+      font-size: 1.125rem;
+      text-decoration: none;
+      box-shadow: 0 10px 25px rgba(251, 191, 36, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(251, 191, 36, 0.4);
+    }
+
+    .cta-button i {
+      margin-left: 8px;
+    }
+
+    .secondary-button {
+      display: inline-block;
+      padding: 16px 32px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      font-weight: 600;
+      border-radius: 50px;
+      font-size: 1.125rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .secondary-button:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .secondary-button i {
+      margin-right: 8px;
+    }
+
+    /* Quick Stats Section */
+    .stats-section {
+      padding: 60px 20px;
+      background: white;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .stat-item {
+      text-align: center;
+      opacity: 0;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .stat-item:nth-child(1) { animation-delay: 0.1s; }
+    .stat-item:nth-child(2) { animation-delay: 0.2s; }
+    .stat-item:nth-child(3) { animation-delay: 0.3s; }
+    .stat-item:nth-child(4) { animation-delay: 0.4s; }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #fbbf24 0%, #ffd700 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+
+    .stat-label {
+      color: #6b7280;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    /* Section Styles */
+    section {
+      padding: 80px 20px;
+    }
+
+    .bg-gray {
+      background: #f9fafb;
+    }
+
+    .bg-white {
+      background: white;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-header h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 16px;
+    }
+
+    .section-header p {
+      font-size: 1.125rem;
+      color: #6b7280;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Module Cards */
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .module-card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .module-card:nth-child(1) { animation-delay: 0.1s; }
+    .module-card:nth-child(2) { animation-delay: 0.2s; }
+    .module-card:nth-child(3) { animation-delay: 0.3s; }
+    .module-card:nth-child(4) { animation-delay: 0.4s; }
+    .module-card:nth-child(5) { animation-delay: 0.5s; }
+    .module-card:nth-child(6) { animation-delay: 0.6s; }
+
+    .module-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .module-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .module-icon i {
+      font-size: 2rem;
+      color: white;
+    }
+
+    .module-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 16px;
+    }
+
+    .module-card > p {
+      color: #6b7280;
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tech-tag {
+      background: #f3f4f6;
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.875rem;
+      transition: all 0.3s ease;
+      cursor: default;
+    }
+
+    .tech-tag:hover {
+      background: #fbbf24;
+      color: white;
+    }
+
+    /* Timeline Section */
+    .timeline-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .timeline-item {
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+    .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+    .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+    .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+
+    .timeline-card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .timeline-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .timeline-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .timeline-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .timeline-card > p {
+      font-size: 1.125rem;
+      color: #6b7280;
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+
+    .focus-box {
+      background: linear-gradient(to right, #fef3c7, #fde68a);
+      border-left: 4px solid #fbbf24;
+      padding: 24px;
+      border-radius: 12px;
+    }
+
+    .focus-box p:first-child {
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 12px;
+    }
+
+    .focus-box p:first-child i {
+      color: #ca8a04;
+      margin-right: 8px;
+    }
+
+    .focus-list {
+      list-style: none;
+      color: #374151;
+    }
+
+    .focus-list li {
+      margin-bottom: 10px;
+      padding-left: 0;
+    }
+
+    .focus-list li i {
+      color: #16a34a;
+      margin-right: 8px;
+    }
+
+    /* Why Choose Section */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .feature-card:nth-child(1) { animation-delay: 0.1s; }
+    .feature-card:nth-child(2) { animation-delay: 0.2s; }
+    .feature-card:nth-child(3) { animation-delay: 0.3s; }
+    .feature-card:nth-child(4) { animation-delay: 0.4s; }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .feature-card i {
+      font-size: 2.5rem;
+      color: #fbbf24;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 12px;
+    }
+
+    .feature-card p {
+      color: #6b7280;
+      line-height: 1.7;
+    }
+
+    /* Final CTA Section */
+    .final-cta {
+      background: linear-gradient(to bottom right, #111827, #1f2937);
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .final-cta h2 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .final-cta > p {
+      font-size: 1.25rem;
+      color: #d1d5db;
+      max-width: 700px;
+      margin: 0 auto 32px;
+    }
+
+    .final-cta .button-group {
+      margin-bottom: 24px;
+    }
+
+    .final-cta .note {
+      color: #9ca3af;
+      font-size: 1rem;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .page-heading h1 {
+        font-size: 2rem;
+      }
+
+      .page-heading p {
+        font-size: 1rem;
+      }
+
+      .section-header h2 {
+        font-size: 2rem;
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+      }
+
+      .button-group {
+        flex-direction: column;
+      }
+
+      .cta-button, .secondary-button {
+        width: 100%;
+        text-align: center;
+      }
+
+      .modules-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .final-cta h2 {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .page-heading {
+        padding: 80px 20px 60px;
+      }
+
+      .module-card, .timeline-card, .feature-card {
+        padding: 24px;
+      }
+
+      .page-heading h1 {
+        font-size: 1.75rem;
+      }
+    }
+
+    /* Footer Styles */
+    #footer {
+      background: #5e008a;
+      color: #ffffff;
+      padding: 50px 20px 20px;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 10px;
+    }
+
+    .footer-col {
+      flex: 1 1 200px;
+    }
+
+    .footer-col h3 {
+      font-size: 22px;
+      color: #fff;
+      margin-bottom: 15px;
+    }
+
+    .footer-col h4 {
+      font-size: 18px;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .footer-col p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #ccc;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-col ul li a {
+      text-decoration: none;
+      color: #ddd;
+      transition: color 0.3s;
+    }
+
+    .footer-col ul li a:hover {
+      color: #855000;
+    }
+
+    /* Social Links */
+    .social-links a {
+      display: inline-block;
+      margin-right: 10px;
+      font-size: 18px;
+      color: #ddd;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .social-links a:hover {
+      color: #002b58;
+      transform: translateY(-3px);
+    }
+
+    /* Bottom Bar */
+    .footer-bottom {
+      text-align: center;
+      margin-top: 30px;
+      border-top: 1px solid #444;
+      padding-top: 15px;
+    }
+
+    .footer-bottom p {
+      font-size: 14px;
+      color: #bbb;
+    }
+
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html"  class="flex items-center flex-shrink-0 page-link" data-page="home">
+      <img src="https://i.ibb.co/DPxTrnv2/Dron-AILogo-1.png" alt="DronAI Logo" class="h-12">
+  </a>
+
+    <!-- accessible button instead of span/onclick -->
+    <button class="menu-toggle"
+            aria-controls="menu"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+      ☰
+    </button>
+
+    <ul id="menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="program.html" class="nav-link page-link" data-page="page-course">Course</a></li>
+      <li><a href="#blog">Mentors</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <!-- Page Heading -->
+  <div class="page-heading">
+    <div class="container">
+      <div class="flagship-badge">
+        <i class="fas fa-graduation-cap"></i>FLAGSHIP PROGRAM
+      </div>
+      <h1>Artificial Intelligence & Deep Learning</h1>
+      <p>Master the complete AI stack in 12 months. From Python fundamentals to deploying production-ready models.</p>
+      <div class="button-group">
+        <a href="#enrollment" class="cta-button">
+          Enroll Now <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Stats -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">12</div>
+        <p class="stat-label">Months</p>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">6</div>
+        <p class="stat-label">Core Modules</p>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">20+</div>
+        <p class="stat-label">Projects</p>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">100%</div>
+        <p class="stat-label">Placement Support</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Course Modules -->
+  <section class="bg-gray">
+    <div class="container">
+      <div class="section-header">
+        <h2>What You'll Master</h2>
+        <p>A comprehensive curriculum designed to take you from beginner to industry-ready AI professional.</p>
+      </div>
+      
+      <div class="modules-grid">
+        <!-- Module 1 -->
+        <div class="module-card">
+          <div class="module-icon" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
+            <i class="fab fa-python"></i>
+          </div>
+          <h3>Python for Data Science</h3>
+          <p>Master Python programming with focus on NumPy, Pandas, Matplotlib, and data manipulation techniques essential for AI development.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">NumPy</span>
+            <span class="tech-tag">Pandas</span>
+            <span class="tech-tag">Matplotlib</span>
+          </div>
+        </div>
+
+        <!-- Module 2 -->
+        <div class="module-card">
+          <div class="module-icon" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+            <i class="fas fa-brain"></i>
+          </div>
+          <h3>Machine Learning Fundamentals</h3>
+          <p>Build strong foundations in supervised and unsupervised learning, regression, classification, and model evaluation techniques.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">Scikit-learn</span>
+            <span class="tech-tag">Regression</span>
+            <span class="tech-tag">Classification</span>
+          </div>
+        </div>
+
+        <!-- Module 3 -->
+        <div class="module-card">
+          <div class="module-icon" style="background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);">
+            <i class="fas fa-project-diagram"></i>
+          </div>
+          <h3>Neural Networks & Deep Learning</h3>
+          <p>Deep dive into artificial neural networks, backpropagation, optimization algorithms, and modern deep learning frameworks.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">TensorFlow</span>
+            <span class="tech-tag">PyTorch</span>
+            <span class="tech-tag">Keras</span>
+          </div>
+        </div>
+
+        <!-- Module 4 -->
+        <div class="module-card">
+          <div class="module-icon" style="background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);">
+            <i class="fas fa-comment-dots"></i>
+          </div>
+          <h3>Natural Language Processing</h3>
+          <p>Learn text processing, sentiment analysis, language models, transformers, and build applications like chatbots and translators.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">BERT</span>
+            <span class="tech-tag">GPT</span>
+            <span class="tech-tag">Transformers</span>
+          </div>
+        </div>
+
+        <!-- Module 5 -->
+        <div class="module-card">
+          <div class="module-icon" style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);">
+            <i class="fas fa-camera"></i>
+          </div>
+          <h3>Computer Vision</h3>
+          <p>Master image processing, CNNs, object detection, image segmentation, and state-of-the-art architectures for visual intelligence.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">OpenCV</span>
+            <span class="tech-tag">YOLO</span>
+            <span class="tech-tag">ResNet</span>
+          </div>
+        </div>
+
+        <!-- Module 6 -->
+        <div class="module-card">
+          <div class="module-icon" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">
+            <i class="fas fa-rocket"></i>
+          </div>
+          <h3>MLOps & Deployment</h3>
+          <p>Learn to deploy, monitor, and maintain ML models in production using Docker, Kubernetes, and cloud platforms.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">Docker</span>
+            <span class="tech-tag">AWS</span>
+            <span class="tech-tag">MLflow</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Learning Timeline -->
+  <section class="bg-white">
+    <div class="container">
+      <div class="section-header">
+        <h2>12-Month Learning Journey</h2>
+        <p>A structured path from fundamentals to production-ready skills, designed for optimal learning outcomes.</p>
+      </div>
+
+      <div class="timeline-container">
+        <!-- Phase 1 -->
+        <div class="timeline-item">
+          <div class="timeline-card">
+            <div class="timeline-header">
+              <span class="timeline-number">01</span>
+              <h3>Months 1-3: Foundation & Core Concepts</h3>
+            </div>
+            <p>Build a strong base in programming, mathematics, and the fundamental principles of machine learning that will underpin your entire AI journey.</p>
+            <div class="focus-box">
+              <p><i class="fas fa-bullseye"></i>Key Focus Areas:</p>
+              <ul class="focus-list">
+                <li><i class="fas fa-check"></i>Python programming essentials and data structures</li>
+                <li><i class="fas fa-check"></i>Statistics, probability, and linear algebra for ML</li>
+                <li><i class="fas fa-check"></i>Introduction to machine learning algorithms</li>
+                <li><i class="fas fa-check"></i>Data preprocessing and exploratory analysis</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="timeline-item">
+          <div class="timeline-card">
+            <div class="timeline-header">
+              <span class="timeline-number">02</span>
+              <h3>Months 4-6: Advanced Machine Learning</h3>
+            </div>
+            <p>Dive deeper into complex algorithms, model tuning, and feature engineering. Start working on real-world datasets and competitive projects.</p>
+            <div class="focus-box">
+              <p><i class="fas fa-bullseye"></i>Key Focus Areas:</p>
+              <ul class="focus-list">
+                <li><i class="fas fa-check"></i>Ensemble methods: Random Forests, XGBoost, LightGBM</li>
+                <li><i class="fas fa-check"></i>Hyperparameter tuning and model optimization</li>
+                <li><i class="fas fa-check"></i>Feature engineering and selection techniques</li>
+                <li><i class="fas fa-check"></i>Real-world Kaggle competitions and projects</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="timeline-item">
+          <div class="timeline-card">
+            <div class="timeline-header">
+              <span class="timeline-number">03</span>
+              <h3>Months 7-9: Deep Learning Specialization</h3>
+            </div>
+            <p>Master neural networks, computer vision (CV), and natural language processing (NLP). Implement cutting-edge architectures and work on specialized projects.</p>
+            <div class="focus-box">
+              <p><i class="fas fa-bullseye"></i>Key Focus Areas:</p>
+              <ul class="focus-list">
+                <li><i class="fas fa-check"></i>CNNs, RNNs, LSTMs, and Transformer architectures</li>
+                <li><i class="fas fa-check"></i>Computer vision: object detection, segmentation, GANs</li>
+                <li><i class="fas fa-check"></i>NLP: BERT, GPT, and language model fine-tuning</li>
+                <li><i class="fas fa-check"></i>Capstone projects in CV or NLP domains</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 4 -->
+        <div class="timeline-item">
+          <div class="timeline-card">
+            <div class="timeline-header">
+              <span class="timeline-number">04</span>
+              <h3>Months 10-12: MLOps & Career Prep</h3>
+            </div>
+            <p>Learn to deploy, monitor, and manage models in production. Focus on resume building, mock interviews, and portfolio development for placements.</p>
+            <div class="focus-box">
+              <p><i class="fas fa-bullseye"></i>Key Focus Areas:</p>
+              <ul class="focus-list">
+                <li><i class="fas fa-check"></i>Model deployment with Docker, Flask, and FastAPI</li>
+                <li><i class="fas fa-check"></i>Cloud platforms: AWS, Azure, Google Cloud</li>
+                <li><i class="fas fa-check"></i>Portfolio development and GitHub showcase</li>
+                <li><i class="fas fa-check"></i>Interview preparation and placement support</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose This Course -->
+  <section class="bg-gray">
+    <div class="container">
+      <div class="section-header">
+        <h2>Why Choose DronAI?</h2>
+        <p>We're not just another online course. We're building India's AI future.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <i class="fas fa-users-cog"></i>
+          <h3>Industry Expert Mentors</h3>
+          <p>Learn from professionals working at top tech companies and leading AI research labs.</p>
+        </div>
+
+        <div class="feature-card">
+          <i class="fas fa-project-diagram"></i>
+          <h3>Hands-On Projects</h3>
+          <p>Build 20+ real-world projects that demonstrate your skills to potential employers.</p>
+        </div>
+
+        <div class="feature-card">
+          <i class="fas fa-certificate"></i>
+          <h3>Industry-Recognized Certificate</h3>
+          <p>Earn a certificate valued by employers across the AI and tech industry.</p>
+        </div>
+
+        <div class="feature-card">
+          <i class="fas fa-briefcase"></i>
+          <h3>Placement Assistance</h3>
+          <p>Dedicated career support including resume reviews, mock interviews, and job referrals.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA Section -->
+  <section class="final-cta">
+    <div class="container">
+      <h2>Ready to Start Your AI Journey?</h2>
+      <p>Join hundreds of students who are already building their future in Artificial Intelligence.</p>
+      <div class="button-group">
+        <a href="#enrollment" class="cta-button">
+          Enroll in AI & Deep Learning <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+      <p class="note">Limited seats available for the next batch starting soon.</p>
+    </div>
+  </section>
+  <footer id="footer">
+    <div class="footer-container">
+      <!-- Column 1 - Brand -->
+      <div class="footer-col">
+        <h3>DronAI</h3>
+        <p>Empowering the next generation of AI innovators. An initiative by Suvidha Foundation.</p>
+      </div>
+  
+      <!-- Column 2 - Quick Links -->
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">Mission</a></li>
+          <li><a href="#services">Blog</a></li>
+          <li><a href="#blog">Career</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+  
+      <!-- Column 3 - Contact Info -->
+      <div class="footer-col">
+        <h4>Contact Info</h4>
+        <address>
+          <p><i class="fas fa-map-marker-alt"></i> Nagpur, Maharashtra, India</p>
+          <p><i class="fas fa-envelope"></i> contact@suvidhafoundation.org</p>
+        </address>
+      </div>
+  
+      <!-- Column 4 - Newsletter -->
+      <div class="footer-col">
+        <h4>Our Newsletter</h4>
+        <p class="newsletter-text">Subscribe to our newsletter to get our latest updates.</p>
+        <form action="#" class="newsletter-form">
+          <input type="email" placeholder="Email address" required>
+          <button type="submit"><i class="fas fa-paper-plane"></i></button>
+        </form>
+      </div>
+  
+      <!-- Column 5 - Social Links -->
+      <div class="footer-col">
+        <h4>Follow Us</h4>
+        <div class="social-links">
+          <a href="https://www.facebook.com/suvidhamahilamandal" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="https://in.linkedin.com/company/suvidha-foundation" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/suvidha_mahila_mandal/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+  
+    <div class="footer-bottom">
+      <p>&copy; 2025 Dronacharya School of AI. All Rights Reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
