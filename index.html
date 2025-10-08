@@ -856,14 +856,13 @@ nav ul li a:hover::before {
     #page5 {
       width: 100%;
       min-height: 100vh;
-      padding: 50px 20px;
+      padding: 80px 20px;
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
       overflow: hidden;
-      perspective: 300px;
-      background: #fcf59c;
+      background: linear-gradient(135deg, #fcf59c 0%, #fff9e6 100%);
     }
 
     .marquee3d {
@@ -872,22 +871,35 @@ nav ul li a:hover::before {
       gap: 20px;
       width: 100%;
       max-width: 1300px;
+      height: 600px;
       justify-content: center;
       align-items: center;
+      position: relative;
     }
 
     .marquee-column {
       display: flex;
       flex-direction: column;
       gap: 15px;
-      animation: scroll 20s linear infinite;
+      flex: 1;
+      max-width: 280px;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
     }
 
-    .marquee-column.reverse {
-      animation-direction: reverse;
+    .marquee-track {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      animation: scrollUp 20s linear infinite;
     }
 
-    @keyframes scroll {
+    .marquee-column.reverse .marquee-track {
+      animation: scrollDown 20s linear infinite;
+    }
+
+    @keyframes scrollUp {
       0% {
         transform: translateY(0);
       }
@@ -896,50 +908,66 @@ nav ul li a:hover::before {
       }
     }
 
+    @keyframes scrollDown {
+      0% {
+        transform: translateY(-50%);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
     .review-card {
       background: #fff;
       border-radius: 12px;
       border: 1px solid rgba(0,0,0,0.1);
       padding: 15px;
-      width: 220px;
+      width: 100%;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       transition: background 0.3s ease, transform 0.3s ease;
+      flex-shrink: 0;
     }
 
     .review-card:hover {
       background: rgba(0,0,0,0.05);
-      transform: translateY(-5px);
+      transform: scale(1.02);
     }
 
     .review-card img {
       border-radius: 50%;
-      width: 32px;
-      height: 32px;
-      margin-right: 10px;
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
     }
 
     .review-header {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .review-header div {
+      flex: 1;
     }
 
     .review-header h4 {
       font-size: 14px;
-      margin: 0;
+      margin: 0 0 2px 0;
       font-weight: bold;
+      color: #333;
     }
 
     .review-header p {
       font-size: 12px;
       margin: 0;
-      color: gray;
+      color: #888;
     }
 
     .review-body {
       font-size: 13px;
-      margin-top: 8px;
-      color: #333;
+      color: #555;
+      line-height: 1.5;
     }
 
     /* Gradient fade edges */
@@ -947,60 +975,117 @@ nav ul li a:hover::before {
       position: absolute;
       left: 0;
       right: 0;
-      height: 80px;
+      height: 100px;
       pointer-events: none;
-      z-index: 5;
+      z-index: 10;
     }
+
     .fade-top {
       top: 0;
-      background: linear-gradient(to bottom, #f9f9f9, transparent);
+      background: linear-gradient(to bottom, #fcf59c, transparent);
     }
+
     .fade-bottom {
       bottom: 0;
-      background: linear-gradient(to top, #ffffff, transparent);
+      background: linear-gradient(to top, #fcf59c, transparent);
+    }
+
+    /* Pause animation on hover */
+    .marquee-column:hover .marquee-track {
+      animation-play-state: paused;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .marquee3d {
+        gap: 15px;
+        height: 500px;
+      }
+
+      .marquee-column {
+        max-width: 240px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .marquee3d {
+        gap: 10px;
+        height: 450px;
+      }
+
+      .marquee-column:nth-child(3),
+      .marquee-column:nth-child(4) {
+        display: none;
+      }
+
+      .marquee-column {
+        max-width: 50%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #page5 {
+        padding: 60px 15px;
+      }
+
+      .marquee3d {
+        height: 400px;
+      }
+
+      .marquee-column:nth-child(2) {
+        display: none;
+      }
+
+      .marquee-column {
+        max-width: 100%;
+      }
+
+      .review-card {
+        padding: 12px;
+      }
     }
 
     /* Page 6 Section */
     #page6 {
-  text-align: center;
-  background: linear-gradient(135deg, #f8f5ff 0%, #fff9e6 100%);
-  padding: 80px 20px;
-}
+      text-align: center;
+      background: linear-gradient(135deg, #fff 0%, #fff 100%);
+      padding: 80px 20px;
+    }
 
-#page6 h2 {
-  font-size: 2.8rem;
-  font-weight: 700;
-  margin-bottom: 10px;
-  color: #5e008a;
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: fadeSlideDown 1s ease forwards;
-  position: relative;
-  display: inline-block;
-}
+    #page6 h2 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #5e008a;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeSlideDown 1s ease forwards;
+      position: relative;
+      display: inline-block;
+    }
 
-#page6 h2::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, #fbbf24, #f59e0b);
-  border-radius: 2px;
-}
+    #page6 h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #fbbf24, #f59e0b);
+      border-radius: 2px;
+    }
 
-#page6 p {
-  font-size: 1.1rem;
-  color: #666;
-  margin-bottom: 50px;
-  margin-top: 25px;
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: fadeSlideDown 1s ease forwards;
-  animation-delay: 0.3s;
-}
+    #page6 p {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 50px;
+      margin-top: 25px;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeSlideDown 1s ease forwards;
+      animation-delay: 0.3s;
+    }
     /* Stats Container */
     .stats-container {
       display: flex;
@@ -1011,39 +1096,39 @@ nav ul li a:hover::before {
 
     /* Individual Stats Box */
     .stats-box {
-  background: white;
-  border-radius: 20px;
-  padding: 40px 60px;
-  box-shadow: 0 8px 30px rgba(94, 0, 138, 0.1);
-  /* transition: all 0.4s ease; */
-  min-width: 240px;
-  border: 2px solid transparent;
-  position: relative;
-  overflow: hidden;
-}
+      background: white;
+      border-radius: 20px;
+      padding: 40px 60px;
+      box-shadow: 0 8px 30px rgba(94, 0, 138, 0.1);
+      /* transition: all 0.4s ease; */
+      min-width: 240px;
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
 
-.stats-box::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(45deg, transparent, rgba(251, 191, 36, 0.1), transparent);
-  transform: rotate(45deg);
-  transition: all 0.5s ease;
-}
+    .stats-box::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(251, 191, 36, 0.1), transparent);
+      transform: rotate(45deg);
+      transition: all 0.5s ease;
+    }
 
-.stats-box:hover::before {
-  top: -100%;
-  left: -100%;
-}
+    .stats-box:hover::before {
+      top: -100%;
+      left: -100%;
+    }
 
-.stats-box:hover {
-  transform: translateY(-15px) scale(1.05);
-  box-shadow: 0 15px 50px rgba(94, 0, 138, 0.2);
-  border-color: #fbbf24;
-}
+    .stats-box:hover {
+      transform: translateY(-15px) scale(1.05);
+      box-shadow: 0 15px 50px rgba(94, 0, 138, 0.2);
+      border-color: #fbbf24;
+    }
 
     /* Number Styling */
     .stats-box span {
@@ -1065,6 +1150,66 @@ nav ul li a:hover::before {
       font-size: 16px;
       color: #444;
       font-weight: 500;
+    }
+
+    .marquee-container {
+  position: relative;
+  width: 80%;
+  margin: 40px auto; /* Centers it horizontally */
+  overflow: hidden;
+  border-radius: 12px;
+  background: linear-gradient(to right, #ffffff, #fff, #ffffff);
+  padding: 20px 0;
+  display: flex;
+  justify-content: center; /* centers the inner marquee horizontally */
+  align-items: center; /* vertically centers logos if needed */
+}
+
+
+    .marquee {
+      display: flex;
+      width: max-content;
+      animation: scroll 15s linear infinite;
+    }
+
+    .marquee img {
+      height: 80px;
+      margin: 0 60px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
+      transition: transform 0.3s ease;
+    }
+
+    .marquee img:hover {
+      transform: scale(1.1);
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* Blue fade on edges */
+    .fade {
+      position: absolute;
+      top: 0;
+      width: 100px;
+      height: 100%;
+      z-index: 2;
+    }
+
+    .fade.left {
+      left: 0;
+      background: linear-gradient(to right, #ffffff, transparent);
+    }
+
+    .fade.right {
+      right: 0;
+      background: linear-gradient(to left, #ffffff, transparent);
     }
 
     /* Footer Styles */
@@ -1184,22 +1329,32 @@ nav ul li a:hover::before {
       <div class="slider-container">
         <!-- Slide 1 - ADD YOUR IMAGE PATH HERE -->
         <div class="slide active">
-          <img src="https://i.postimg.cc/WNsTDYrt/Free-1.jpg" alt="Slide 1">
+          <img src="S1.jpg" alt="Slide 1">
         </div>
 
         <!-- Slide 2 - ADD YOUR IMAGE PATH HERE -->3
         <div class="slide">
-          <img src="https://i.postimg.cc/ydpwtPvw/Free.jpg" alt="Slide 2">
+          <img src="Free.jpg" alt="Slide 2">
         </div>
 
         <!-- Slide 3 - ADD YOUR IMAGE PATH HERE -->
         <div class="slide">
-          <img src="https://i.postimg.cc/mkc0sHnx/2.png" alt="Slide 3">
+          <img src="JOIN IN A COMMUNITY (5).png" alt="Slide 3">
         </div>
 
         <!-- Slide 4 - ADD YOUR IMAGE PATH HERE -->
         <div class="slide">
-          <img src="https://i.postimg.cc/W31B5K6t/1.png" alt="Slide 4">
+          <img src="S2.jpg" alt="Slide 4">
+        </div>
+
+        <!-- Slide 5 - ADD YOUR IMAGE PATH HERE -->
+        <div class="slide">
+          <img src="S5.jpg" alt="Slide 5">
+        </div>
+
+        <!-- Slide 6 - ADD YOUR IMAGE PATH HERE -->
+        <div class="slide">
+          <img src="S6.jpg" alt="Slide 6">
         </div>
 
         <!-- ADD MORE SLIDES HERE IF NEEDED -->
@@ -1226,6 +1381,8 @@ nav ul li a:hover::before {
         <span class="dot" data-slide="1"></span>
         <span class="dot" data-slide="2"></span>
         <span class="dot" data-slide="3"></span>
+        <span class="dot" data-slide="4"></span>
+        <span class="dot" data-slide="5"></span>
         <!-- ADD MORE DOTS IF YOU ADD MORE SLIDES -->
       </div>
 
@@ -1236,7 +1393,7 @@ nav ul li a:hover::before {
     
     <div id="page2">
       <div id="page2-left">
-        <h1>About Suvidha Foundation</h1>
+        <h1>About DronAI</h1>
         <p>
           Suvidha Foundation is a non-profit organization dedicated to empowering
           youth through technology education. Our DronAI program represents the
@@ -1279,7 +1436,7 @@ nav ul li a:hover::before {
 
     <div id="page3">
       <div id="page3-text">
-        <h1>Our Course</h1>
+        <h1>Our Program</h1>
         <p>Master the latest technologies with our expert-led courses</p>
       </div>
       <div class="card-container">
@@ -1297,7 +1454,7 @@ nav ul li a:hover::before {
               Master neural networks, machine learning models, and intelligent algorithms 
               through hands-on projects using Python and TensorFlow.
             </p>
-            <a href="#" class="course-btn">Explore Course</a>
+            <a href="#" class="course-btn">Learn More</a>
           </div>
         </div>
       </div>
@@ -1348,173 +1505,341 @@ nav ul li a:hover::before {
       <div class="marquee3d">
         <!-- Column 1 -->
         <div class="marquee-column">
-          <div class="review-card">
-            <div class="review-header">
-              <img src="https://avatar.vercel.sh/jack" alt="">
-              <div>
-                <h4>Ned Stark</h4>
-                <p>@nedstark</p>
+          <div class="marquee-track">
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://avatar.vercel.sh/jack" alt="User Avatar">
+                <div>
+                  <h4>Ned Stark</h4>
+                  <p>@nedstark</p>
+                </div>
+              </div>
+              <div class="review-body">
+                The courses are beginner-friendly and easy to follow. Highly recommended!
               </div>
             </div>
-            <div class="review-body">
-              he courses are beginner-friendly and easy to follow
-            </div>
-          </div>
-  
-          <div class="review-card">
-            <div class="review-header">
-              <img src="https://avatar.vercel.sh/jill" alt="">
-              <div>
-                <h4>Robb Stark</h4>
-                <p>@robbstark</p>
+    
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://avatar.vercel.sh/jill" alt="User Avatar">
+                <div>
+                  <h4>Robb Stark</h4>
+                  <p>@robbstark</p>
+                </div>
+              </div>
+              <div class="review-body">
+                I gained practical skills that I could apply immediately in my work.
               </div>
             </div>
-            <div class="review-body">
-              I gained practical skills that I could apply immediately
-            </div>
-          </div>
-  
-          <div class="review-card">
-            <div class="review-header">
-              <img src="https://avatar.vercel.sh/john" alt="">
-              <div>
-                <h4>John Show</h4>
-                <p>@johnshow</p>
+    
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://avatar.vercel.sh/john" alt="User Avatar">
+                <div>
+                  <h4>John Snow</h4>
+                  <p>@johnsnow</p>
+                </div>
+              </div>
+              <div class="review-body">
+                Great mentors who explain concepts clearly and patiently.
               </div>
             </div>
-            <div class="review-body">
-              Great mentors who explain concepts clearly.
+    
+            <!-- Duplicate for seamless loop -->
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://avatar.vercel.sh/jack" alt="User Avatar">
+                <div>
+                  <h4>Ned Stark</h4>
+                  <p>@nedstark</p>
+                </div>
+              </div>
+              <div class="review-body">
+                The courses are beginner-friendly and easy to follow. Highly recommended!
+              </div>
+            </div>
+    
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://avatar.vercel.sh/jill" alt="User Avatar">
+                <div>
+                  <h4>Robb Stark</h4>
+                  <p>@robbstark</p>
+                </div>
+              </div>
+              <div class="review-body">
+                I gained practical skills that I could apply immediately in my work.
+              </div>
+            </div>
+    
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://avatar.vercel.sh/john" alt="User Avatar">
+                <div>
+                  <h4>John Snow</h4>
+                  <p>@johnsnow</p>
+                </div>
+              </div>
+              <div class="review-body">
+                Great mentors who explain concepts clearly and patiently.
+              </div>
             </div>
           </div>
         </div>
-  
-        <!-- Column 2 -->
+    
+        <!-- Column 2 (Reverse) -->
         <div class="marquee-column reverse">
-          <div class="review-card">
-            <div class="review-header">
-              <img src="https://avatar.vercel.sh/jill" alt="">
-              <div>
-                <h4>Arya Stark</h4>
-                <p>@aryastark</p>
+          <div class="marquee-track">
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://avatar.vercel.sh/sarah" alt="User Avatar">
+                <div>
+                  <h4>Arya Stark</h4>
+                  <p>@aryastark</p>
+                </div>
+              </div>
+              <div class="review-body">
+                I don't know what to say. I'm speechless. This is amazing and life-changing!
               </div>
             </div>
-            <div class="review-body">
-              I don't know what to say. I'm speechless. This is amazing.
-            </div>
-          </div>
-  
-          <div class="review-card">
-            <div class="review-header">
-              <img src="https://avatar.vercel.sh/jack" alt="">
-              <div>
-                <h4>Lady Stark</h4>
-                <p>@ladystark</p>
+    
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://avatar.vercel.sh/mike" alt="User Avatar">
+                <div>
+                  <h4>Lady Stark</h4>
+                  <p>@ladystark</p>
+                </div>
+              </div>
+              <div class="review-body">
+                I've never seen anything like this before. The teaching quality is exceptional.
               </div>
             </div>
-            <div class="review-body">
-              I've never seen anything like this before. It's amazing. I love it.
-            </div>
-          </div>
-  
-          <div class="review-card">
-            <div class="review-header">
-              <img src="https://avatar.vercel.sh/john" alt="">
-              <div>
-                <h4>Tywin Lannister</h4>
-                <p>@tywinlannister</p>
+    
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://avatar.vercel.sh/david" alt="User Avatar">
+                <div>
+                  <h4>Tywin Lannister</h4>
+                  <p>@tywinlannister</p>
+                </div>
+              </div>
+              <div class="review-body">
+                I'm at a loss for words. This program exceeded all my expectations.
               </div>
             </div>
-            <div class="review-body">
-              I'm at a loss for words. This is amazing. I love it.
+    
+            <!-- Duplicate for seamless loop -->
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://avatar.vercel.sh/sarah" alt="User Avatar">
+                <div>
+                  <h4>Arya Stark</h4>
+                  <p>@aryastark</p>
+                </div>
+              </div>
+              <div class="review-body">
+                I don't know what to say. I'm speechless. This is amazing and life-changing!
+              </div>
+            </div>
+    
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://avatar.vercel.sh/mike" alt="User Avatar">
+                <div>
+                  <h4>Lady Stark</h4>
+                  <p>@ladystark</p>
+                </div>
+              </div>
+              <div class="review-body">
+                I've never seen anything like this before. The teaching quality is exceptional.
+              </div>
+            </div>
+    
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://avatar.vercel.sh/david" alt="User Avatar">
+                <div>
+                  <h4>Tywin Lannister</h4>
+                  <p>@tywinlannister</p>
+                </div>
+              </div>
+              <div class="review-body">
+                I'm at a loss for words. This program exceeded all my expectations.
+              </div>
             </div>
           </div>
         </div>
-  
+    
         <!-- Column 3 -->
         <div class="marquee-column">
-          <div class="review-card">
-            <div class="review-header">
-              <img src="https://avatar.vercel.sh/john" alt="">
-              <div>
-                <h4>Tyrion Lannister</h4>
-                <p>@tyrionlannister</p>
+          <div class="marquee-track">
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://avatar.vercel.sh/alex" alt="User Avatar">
+                <div>
+                  <h4>Tyrion Lannister</h4>
+                  <p>@tyrionlannister</p>
+                </div>
+              </div>
+              <div class="review-body">
+                The hands-on projects really helped solidify my understanding of AI concepts.
               </div>
             </div>
-            <div class="review-body">
-              I'm at a loss for words. This is amazing. I love it.
-            </div>
-          </div>
-  
-          <div class="review-card">
-            <div class="review-header">
-              <img src="https://avatar.vercel.sh/jack" alt="">
-              <div>
-                <h4>Sansa Stark</h4>
-                <p>@sansastark</p>
+    
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://avatar.vercel.sh/emma" alt="User Avatar">
+                <div>
+                  <h4>Sansa Stark</h4>
+                  <p>@sansastark</p>
+                </div>
+              </div>
+              <div class="review-body">
+                The support from the community and mentors is outstanding. Worth every penny!
               </div>
             </div>
-            <div class="review-body">
-              I've never seen anything like this before. It's amazing. I love it.
-            </div>
-          </div>
-  
-          <div class="review-card">
-            <div class="review-header">
-              <img src="https://avatar.vercel.sh/jill" alt="">
-              <div>
-                <h4>Ramsey Bolton</h4>
-                <p>@ramseybolton</p>
+    
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://avatar.vercel.sh/chris" alt="User Avatar">
+                <div>
+                  <h4>Ramsey Bolton</h4>
+                  <p>@ramseybolton</p>
+                </div>
+              </div>
+              <div class="review-body">
+                Perfect blend of theory and practical application. Couldn't ask for more!
               </div>
             </div>
-            <div class="review-body">
-              I don't know what to say. I'm speechless. This is amazing.
+    
+            <!-- Duplicate for seamless loop -->
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://avatar.vercel.sh/alex" alt="User Avatar">
+                <div>
+                  <h4>Tyrion Lannister</h4>
+                  <p>@tyrionlannister</p>
+                </div>
+              </div>
+              <div class="review-body">
+                The hands-on projects really helped solidify my understanding of AI concepts.
+              </div>
+            </div>
+    
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://avatar.vercel.sh/emma" alt="User Avatar">
+                <div>
+                  <h4>Sansa Stark</h4>
+                  <p>@sansastark</p>
+                </div>
+              </div>
+              <div class="review-body">
+                The support from the community and mentors is outstanding. Worth every penny!
+              </div>
+            </div>
+    
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://avatar.vercel.sh/chris" alt="User Avatar">
+                <div>
+                  <h4>Ramsey Bolton</h4>
+                  <p>@ramseybolton</p>
+                </div>
+              </div>
+              <div class="review-body">
+                Perfect blend of theory and practical application. Couldn't ask for more!
+              </div>
             </div>
           </div>
         </div>
-  
-        <!-- Column 4 -->
+    
+        <!-- Column 4 (Reverse) -->
         <div class="marquee-column reverse">
-          <div class="review-card">
-            <div class="review-header">
-              <img src="https://avatar.vercel.sh/jack" alt="">
-              <div>
-                <h4>Bran Stark</h4>
-                <p>@branstark</p>
+          <div class="marquee-track">
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://avatar.vercel.sh/lucas" alt="User Avatar">
+                <div>
+                  <h4>Bran Stark</h4>
+                  <p>@branstark</p>
+                </div>
+              </div>
+              <div class="review-body">
+                This course opened up so many career opportunities for me. Truly grateful!
               </div>
             </div>
-            <div class="review-body">
-              I've never seen anything like this before. It's amazing. I love it.
-            </div>
-          </div>
-  
-          <div class="review-card">
-            <div class="review-header">
-              <img src="https://avatar.vercel.sh/jill" alt="">
-              <div>
-                <h4>Hodor</h4>
-                <p>@hodor</p>
+    
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://avatar.vercel.sh/olivia" alt="User Avatar">
+                <div>
+                  <h4>Hodor</h4>
+                  <p>@hodor</p>
+                </div>
+              </div>
+              <div class="review-body">
+                The curriculum is well-structured and the pace is perfect for learning.
               </div>
             </div>
-            <div class="review-body">
-              I don't know what to say. I'm speechless. This is amazing.
-            </div>
-          </div>
-  
-          <div class="review-card">
-            <div class="review-header">
-              <img src="https://avatar.vercel.sh/john" alt="">
-              <div>
-                <h4>jaime Lannister</h4>
-                <p>@jaimelannister</p>
+    
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://avatar.vercel.sh/ryan" alt="User Avatar">
+                <div>
+                  <h4>Jaime Lannister</h4>
+                  <p>@jaimelannister</p>
+                </div>
+              </div>
+              <div class="review-body">
+                Best investment I've made in my career. The ROI is incredible!
               </div>
             </div>
-            <div class="review-body">
-              I'm at a loss for words. This is amazing. I love it.
+    
+            <!-- Duplicate for seamless loop -->
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://avatar.vercel.sh/lucas" alt="User Avatar">
+                <div>
+                  <h4>Bran Stark</h4>
+                  <p>@branstark</p>
+                </div>
+              </div>
+              <div class="review-body">
+                This course opened up so many career opportunities for me. Truly grateful!
+              </div>
+            </div>
+    
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://avatar.vercel.sh/olivia" alt="User Avatar">
+                <div>
+                  <h4>Hodor</h4>
+                  <p>@hodor</p>
+                </div>
+              </div>
+              <div class="review-body">
+                The curriculum is well-structured and the pace is perfect for learning.
+              </div>
+            </div>
+    
+            <div class="review-card">
+              <div class="review-header">
+                <img src="https://avatar.vercel.sh/ryan" alt="User Avatar">
+                <div>
+                  <h4>Jaime Lannister</h4>
+                  <p>@jaimelannister</p>
+                </div>
+              </div>
+              <div class="review-body">
+                Best investment I've made in my career. The ROI is incredible!
+              </div>
             </div>
           </div>
         </div>
       </div>
-  
+    
       <!-- Fading edges -->
       <div class="fade-top"></div>
       <div class="fade-bottom"></div>
@@ -1523,6 +1848,23 @@ nav ul li a:hover::before {
     <div id="page6">
       <h2>Our Success Stories</h2>
       <p>Students placed in top companies</p>
+      <div class="marquee-container">
+        <div class="fade left"></div>
+    
+        <div class="marquee">
+          <!-- You can use local images or image URLs -->
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM Logo">
+          <img src="f:\tcs-tata-consultancy-services2792.logowik.com.jpg" alt="TCS Logo">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg" alt="Wipro Logo">
+    
+          <!-- Repeat logos for continuous scroll -->
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM Logo">
+          <img src="f:\tcs-tata-consultancy-services2792.logowik.com.jpg" alt="TCS Logo">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg" alt="Wipro Logo">
+        </div>
+    
+        <div class="fade right"></div>
+      </div>
       <div class="stats-container">
         <div class="stats-box">
           <span id="student-count">0</span><span class="plus">+</span>
@@ -1534,6 +1876,7 @@ nav ul li a:hover::before {
           <p>Students Internship</p>
         </div>
       </div>
+      
     </div>
     
     <footer id="footer">
@@ -1550,7 +1893,7 @@ nav ul li a:hover::before {
           <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="#about">About</a></li>
-            <li><a href="program.html">Course</a></li>
+            <li><a href="program.html">Program</a></li>
             <li><a href="#blog">Career</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
