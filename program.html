@@ -22,12 +22,13 @@
     }
     
     /* Navbar */
+    /* Navbar */
     nav {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -79,7 +80,7 @@ nav a:hover img {
 nav ul {
   list-style: none;
   display: flex;
-  gap: 35px;
+  gap: 16px;
   align-items: center;
 }
 
@@ -90,6 +91,7 @@ nav ul li {
 nav ul li a {
   color: #1f2937;
   text-decoration: none;
+  background-color: #ffffff4d;
   font-weight: 600;
   font-size: 16px;
   padding: 8px 16px;
@@ -193,6 +195,7 @@ nav ul li a:hover::before {
     width: calc(100vw - 40px);
   }
 }
+
     /* visually-hidden (for screen readers) */
     .sr-only {
       position: absolute;
@@ -215,7 +218,7 @@ nav ul li a:hover::before {
 
     /* Page Heading Section */
     .page-heading {
-      background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+      background: linear-gradient(135deg, #811e8a 0%, #e63bf6 100%);
       padding: 100px 20px 80px;
       text-align: center;
       position: relative;
@@ -700,95 +703,131 @@ nav ul li a:hover::before {
 
     /* Footer Styles */
     #footer {
-      background: #5e008a;
-      color: #ffffff;
-      padding: 50px 20px 20px;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    }
+  background: #5e008a;
+  color: #ffffff;
+  padding: 50px 20px 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
 
-    .footer-container {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      max-width: 1200px;
-      margin: 0 auto;
-      gap: 10px;
-    }
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 40px; /* ✅ evenly spaced gap between columns */
+}
 
-    .footer-col {
-      flex: 1 1 200px;
-    }
+.footer-col {
+  flex: 1 1 250px; /* ✅ makes each column take equal width */
+  min-width: 220px; /* ✅ prevents columns from shrinking too small */
+}
 
-    .footer-col h3 {
-      font-size: 22px;
-      color: #fff;
-      margin-bottom: 15px;
-    }
+.quick-links {
+  flex: 0 1 180px; /* Reduce width */
+}
 
-    .footer-col h4 {
-      font-size: 18px;
-      margin-bottom: 12px;
-      color: #fff;
-    }
+.social-media {
+  margin-top: 30px; /* Adds vertical space */
+}
 
-    .footer-col p {
-      font-size: 14px;
-      line-height: 1.6;
-      color: #ccc;
-    }
+@media (max-width: 768px) {
+  .social-media {
+    margin-top: 50px; /* Increase spacing on smaller screens */
+  }
 
-    .footer-col ul {
-      list-style: none;
-      padding: 0;
-    }
+  .quick-links {
+    align-self: center; /* Center it visually on narrow viewports */
+  }
+}
 
-    .footer-col ul li {
-      margin-bottom: 10px;
-    }
 
-    .footer-col ul li a {
-      text-decoration: none;
-      color: #ddd;
-      transition: color 0.3s;
-    }
 
-    .footer-col ul li a:hover {
-      color: #855000;
-    }
+.footer-col h3 {
+  font-size: 22px;
+  color: #fff;
+  margin-bottom: 15px;
+}
 
-    /* Social Links */
-    .social-links a {
-      display: inline-block;
-      margin-right: 10px;
-      font-size: 18px;
-      color: #ddd;
-      transition: color 0.3s, transform 0.3s;
-    }
+.footer-col h4 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #fff;
+}
 
-    .social-links a:hover {
-      color: #002b58;
-      transform: translateY(-3px);
-    }
+.footer-col p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #ccc;
+}
 
-    /* Bottom Bar */
-    .footer-bottom {
-      text-align: center;
-      margin-top: 30px;
-      border-top: 1px solid #444;
-      padding-top: 15px;
-    }
+/* ✅ Add consistent spacing for lists */
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-    .footer-bottom p {
-      font-size: 14px;
-      color: #bbb;
-    }
+.footer-col ul li {
+  margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+  text-decoration: none;
+  color: #ddd;
+  transition: color 0.3s;
+}
+
+.footer-col ul li a:hover {
+  color: #ffcc33;
+}
+
+/* ✅ Social Links with equal spacing */
+.social-links {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.social-links a {
+  font-size: 20px;
+  color: #ddd;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.social-links a:hover {
+  color: #ffcc33;
+  transform: translateY(-3px);
+}
+
+/* ✅ Bottom Bar */
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  border-top: 1px solid #444;
+  padding-top: 15px;
+}
+
+.footer-bottom p {
+  font-size: 14px;
+  color: #bbb;
+}
+
+/* ✅ Responsive adjustments */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+}
 
   </style>
 </head>
 <body>
   <nav>
     <a href="index.html"  class="flex items-center flex-shrink-0 page-link" data-page="home">
-      <img src="https://i.ibb.co/DPxTrnv2/Dron-AILogo-1.png" alt="DronAI Logo" class="h-12">
+      <img src="https://i.ibb.co/DPxTrnv2/Dron-AILogo-1.png" alt="DronAI Logo" class="h-14">
   </a>
 
     <!-- accessible button instead of span/onclick -->
@@ -801,9 +840,11 @@ nav ul li a:hover::before {
 
     <ul id="menu">
       <li><a href="index.html">Home</a></li>
-      <li><a href="#about">About</a></li>
+      <li><a href="About.html">About</a></li>
       <li><a href="program.html" >Program</a></li>
-      <li><a href="#blog">Mentors</a></li>
+      <li><a href="#Publicaton">Publication</a></li>
+      <li><a href="#Projects">Projects</a></li>
+      <li><a href="#Mentors">Mentors</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -1094,39 +1135,44 @@ nav ul li a:hover::before {
       <div class="footer-col">
         <h4>Quick Links</h4>
         <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">Mission</a></li>
-          <li><a href="#services">Blog</a></li>
-          <li><a href="#blog">Career</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="About.html">About</a></li>
+          <li><a href="program.html">Program</a></li>
+          <li><a href="#Publication">Publication</a></li>
+          <li><a href="#Projects">Projects</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
   
       <!-- Column 3 - Contact Info -->
       <div class="footer-col">
-        <h4>Contact Info</h4>
+        <h4>Office Headquarters</h4>
         <address>
-          <p><i class="fas fa-map-marker-alt"></i> Nagpur, Maharashtra, India</p>
-          <p><i class="fas fa-envelope"></i> contact@suvidhafoundation.org</p>
+          <p><i class="fas fa-map-marker-alt"></i> <b>Nagpur Headquarter:</b>
+            Suvidha Foundation, Motghare Bhavan, Ward No. 4, Santnagar, Annamod, Near Water Tank, Khaperkheda, Saoner, Nagpur, Maharashtra, India Pincode - 441102
+            </p>
+          <p><i class="fas fa-map-marker-alt"></i> <b>Hyderabad Headquarter:</b>
+            Vazhra Nirman Pushpak, C Block 701, 500090, Hyderabad</p>
+          <p><i class="fas fa-envelope"></i> <b>Mail:</b>contact@suvidhafoundation.org</p>
         </address>
       </div>
   
       <!-- Column 4 - Newsletter -->
-      <div class="footer-col">
+      <!-- <div class="footer-col">
         <h4>Our Newsletter</h4>
         <p class="newsletter-text">Subscribe to our newsletter to get our latest updates.</p>
         <form action="#" class="newsletter-form">
           <input type="email" placeholder="Email address" required>
           <button type="submit"><i class="fas fa-paper-plane"></i></button>
         </form>
-      </div>
+      </div> -->
   
       <!-- Column 5 - Social Links -->
       <div class="footer-col">
         <h4>Follow Us</h4>
         <div class="social-links">
-          <a href="https://www.facebook.com/suvidhamahilamandal" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+          <!-- <a href="https://www.facebook.com/suvidhamahilamandal" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a> -->
+          <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
           <a href="https://in.linkedin.com/company/suvidha-foundation" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
           <a href="https://www.instagram.com/suvidha_mahila_mandal/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
         </div>
@@ -1137,6 +1183,50 @@ nav ul li a:hover::before {
       <p>&copy; 2025 Dronacharya School of AI. All Rights Reserved.</p>
     </div>
   </footer>
-</body>
+  <script>
+    (function () {
+    const nav = document.querySelector('nav');
+    const toggle = nav.querySelector('.menu-toggle');
+    const menu = nav.querySelector('#menu');
 
+    if (!toggle || !menu) {
+      console.error('Menu toggle or menu element not found');
+      return;
+    }
+
+    // Toggle menu on button click
+    toggle.addEventListener('click', function (e) {
+      const isOpen = menu.classList.toggle('show');
+      // update accessibility attribute
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    // Close when any menu link is clicked (useful for single page)
+    menu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        if (menu.classList.contains('show')) {
+          menu.classList.remove('show');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
+    // Close when clicking outside the nav (mobile)
+    document.addEventListener('click', (evt) => {
+      if (!nav.contains(evt.target) && menu.classList.contains('show')) {
+        menu.classList.remove('show');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Optional: close menu on ESC key
+    document.addEventListener('keydown', (evt) => {
+      if (evt.key === 'Escape' && menu.classList.contains('show')) {
+        menu.classList.remove('show');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
+  </script>
+</body>
 </html>
