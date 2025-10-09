@@ -202,7 +202,7 @@ nav ul li a:hover::before {
 
     /* Page Heading Section */
     .page-heading {
-      background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+      background: linear-gradient(135deg, #811e8a 0%, #e63bf6 100%);
       padding: 100px 20px 80px;
       text-align: center;
       position: relative;
@@ -562,7 +562,7 @@ nav ul li a:hover::before {
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 8px 30px rgba(94, 0, 138, 0.1);
-      text-align: left;
+      text-align: center;
       transition: all 0.4s ease;
       opacity: 0;
       transform: translateY(40px);
@@ -633,86 +633,124 @@ nav ul li a:hover::before {
 
     /* Footer Styles */
     #footer {
-      background: #5e008a;
-      color: #ffffff;
-      padding: 50px 20px 20px;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    }
+  background: #5e008a;
+  color: #ffffff;
+  padding: 50px 20px 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
 
-    .footer-container {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      max-width: 1200px;
-      margin: 0 auto;
-      gap: 10px;
-    }
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 40px; /* ✅ evenly spaced gap between columns */
+}
 
-    .footer-col {
-      flex: 1 1 200px;
-    }
+.footer-col {
+  flex: 1 1 250px; /* ✅ makes each column take equal width */
+  min-width: 220px; /* ✅ prevents columns from shrinking too small */
+}
 
-    .footer-col h3 {
-      font-size: 22px;
-      color: #fff;
-      margin-bottom: 15px;
-    }
+.quick-links {
+  flex: 0 1 180px; /* Reduce width */
+}
 
-    .footer-col h4 {
-      font-size: 18px;
-      margin-bottom: 12px;
-      color: #fff;
-    }
+.social-media {
+  margin-top: 30px; /* Adds vertical space */
+}
 
-    .footer-col p {
-      font-size: 14px;
-      line-height: 1.6;
-      color: #ccc;
-    }
+@media (max-width: 768px) {
+  .social-media {
+    margin-top: 50px; /* Increase spacing on smaller screens */
+  }
 
-    .footer-col ul {
-      list-style: none;
-      padding: 0;
-    }
+  .quick-links {
+    align-self: center; /* Center it visually on narrow viewports */
+  }
+}
 
-    .footer-col ul li {
-      margin-bottom: 10px;
-    }
 
-    .footer-col ul li a {
-      text-decoration: none;
-      color: #ddd;
-      transition: color 0.3s;
-    }
 
-    .footer-col ul li a:hover {
-      color: #855000;
-    }
+.footer-col h3 {
+  font-size: 22px;
+  color: #fff;
+  margin-bottom: 15px;
+}
 
-    .social-links a {
-      display: inline-block;
-      margin-right: 10px;
-      font-size: 18px;
-      color: #ddd;
-      transition: color 0.3s, transform 0.3s;
-    }
+.footer-col h4 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #fff;
+}
 
-    .social-links a:hover {
-      color: #002b58;
-      transform: translateY(-3px);
-    }
+.footer-col p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #ccc;
+}
 
-    .footer-bottom {
-      text-align: center;
-      margin-top: 30px;
-      border-top: 1px solid #444;
-      padding-top: 15px;
-    }
+/* ✅ Add consistent spacing for lists */
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-    .footer-bottom p {
-      font-size: 14px;
-      color: #bbb;
-    }
+.footer-col ul li {
+  margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+  text-decoration: none;
+  color: #ddd;
+  transition: color 0.3s;
+}
+
+.footer-col ul li a:hover {
+  color: #ffcc33;
+}
+
+/* ✅ Social Links with equal spacing */
+.social-links {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.social-links a {
+  font-size: 20px;
+  color: #ddd;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.social-links a:hover {
+  color: #ffcc33;
+  transform: translateY(-3px);
+}
+
+/* ✅ Bottom Bar */
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  border-top: 1px solid #444;
+  padding-top: 15px;
+}
+
+.footer-bottom p {
+  font-size: 14px;
+  color: #bbb;
+}
+
+/* ✅ Responsive adjustments */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+}
   </style>
 </head>
 <body>
@@ -828,7 +866,7 @@ nav ul li a:hover::before {
       <div class="mentor-card">
         <img src="Shobha_Motghare.jpeg" alt="Mentor 1">
         <div class="mentor-info">
-          <h3>Shoba Motghare: : </h3>
+          <h3>Shoba Motghare </h3>
           <p>Secretary</p>
         </div>
       </div>
@@ -836,7 +874,7 @@ nav ul li a:hover::before {
       <div class="mentor-card">
         <img src="Payal_Badhe.jpg" alt="Mentor 2">
         <div class="mentor-info">
-          <h3>Payal Badhe: </h3>
+          <h3>Payal Badhe </h3>
           <p>President</p>
         </div>
       </div>
@@ -844,7 +882,7 @@ nav ul li a:hover::before {
       <div class="mentor-card">
         <img src="Nilima_Kalambe.jpg" alt="Mentor 3">
         <div class="mentor-info">
-          <h3>Nilima Kalambe: </h3>
+          <h3>Nilima Kalambe </h3>
           <p>Advisor</p>
         </div>
       </div>
@@ -852,7 +890,7 @@ nav ul li a:hover::before {
       <div class="mentor-card">
         <img src="Payal_Badhe.jpg" alt="Mentor 4">
         <div class="mentor-info">
-          <h3>Payal Badhe: </h3>
+          <h3>Payal Badhe </h3>
           <p>President</p>
         </div>
       </div>
