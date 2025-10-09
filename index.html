@@ -1428,6 +1428,26 @@ nav ul li a:hover::before {
   min-width: 220px; /* ✅ prevents columns from shrinking too small */
 }
 
+.quick-links {
+  flex: 0 1 180px; /* Reduce width */
+}
+
+.social-media {
+  margin-top: 30px; /* Adds vertical space */
+}
+
+@media (max-width: 768px) {
+  .social-media {
+    margin-top: 50px; /* Increase spacing on smaller screens */
+  }
+
+  .quick-links {
+    align-self: center; /* Center it visually on narrow viewports */
+  }
+}
+
+
+
 .footer-col h3 {
   font-size: 22px;
   color: #fff;
@@ -2118,7 +2138,8 @@ to India's growth.
         </div>
     
         <!-- Column 2 - Quick Links -->
-        <div class="footer-col">
+        <div class="footer-col quick-links">
+
           <h4>Quick Links</h4>
           <ul>
             <li><a href="index.html">Home</a></li>
@@ -2154,7 +2175,8 @@ to India's growth.
         </div> -->
     
         <!-- Column 5 - Social Links -->
-        <div class="footer-col">
+        <div class="footer-col social-media">
+
           <h4>Follow Us</h4>
           <div class="social-links">
             <!-- <a href="https://www.facebook.com/suvidhamahilamandal" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a> -->
