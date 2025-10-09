@@ -51,8 +51,6 @@ nav:hover {
 }
 
 nav a img {
-  width:40px;
-  height:50px;
   transition: transform 0.3s ease;
 }
 
@@ -83,7 +81,7 @@ nav a:hover img {
 nav ul {
   list-style: none;
   display: flex;
-  gap: 35px;
+  gap: 16px;
   align-items: center;
 }
 
@@ -93,8 +91,8 @@ nav ul li {
 
 nav ul li a {
   color: #1f2937;
-  background-color: rgb(255, 255, 255, 0.55);
   text-decoration: none;
+  background-color: #ffffff4d;
   font-weight: 600;
   font-size: 16px;
   padding: 8px 16px;
@@ -537,6 +535,7 @@ nav ul li a:hover::before {
       display: flex;
       justify-content: center;
       align-items: center;
+      text-align: center;
       flex-direction: column;
       /* transition: all 0.4s ease; */
       border: 2px solid transparent;
@@ -965,15 +964,40 @@ nav ul li a:hover::before {
 
 
     #page5 {
-      width: 100%;
-      min-height: 100vh;
-      padding: 80px 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, #fcf59c 0%, #fff9e6 100%);
+  width: 100%;
+  min-height: 100vh;
+  padding: 80px 20px;
+  display: flex;
+  flex-direction: column;  /* ADD THIS LINE */
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #fcf59c 0%, #fff9e6 100%);
+}
+
+#page5 h2 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 50px;  /* CHANGE FROM 10px TO 50px */
+  color: #5e008a;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeSlideDown 1s ease forwards;
+  position: relative;
+  display: inline-block;
+}
+
+    #page5 h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #fbbf24, #f59e0b);
+      border-radius: 2px;
     }
 
     .marquee3d {
@@ -1414,7 +1438,7 @@ nav ul li a:hover::before {
 <body>
   <nav>
     <a href="index.html"  class="flex items-center flex-shrink-0 page-link" data-page="home">
-      <img src="https://i.ibb.co/DPxTrnv2/Dron-AILogo-1.png" alt="DronAI Logo" class="h-12">
+      <img src="https://i.ibb.co/DPxTrnv2/Dron-AILogo-1.png" alt="DronAI Logo" class="h-14">
   </a>
 
     <!-- accessible button instead of span/onclick -->
@@ -1429,7 +1453,9 @@ nav ul li a:hover::before {
       <li><a href="index.html">Home</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="program.html" >Program</a></li>
-      <li><a href="#blog">Mentors</a></li>
+      <li><a href="#Publicaton">Publication</a></li>
+      <li><a href="#Projects">Projects</a></li>
+      <li><a href="#Mentors">Mentors</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -1440,7 +1466,7 @@ nav ul li a:hover::before {
       <div class="slider-container">
       <!-- Slide 1 -->
       <div class="slide active">
-        <img src="S1.jpg" alt="Slide 1">
+        <img src="s11.png" alt="Slide 1">
       </div>
 
       <!-- Slide 2 -->
@@ -1466,7 +1492,7 @@ nav ul li a:hover::before {
       <!-- Slide 6 - Banner Slide -->
       <div class="slide">
         <div class="banner">
-          <img src="https://i.postimg.cc/cH8BRwC4/Picsart-25-10-09-15-14-00-179.jpg alt="AI Course Banner" class="banner-image">
+          <img src="Picsart_25-10-09_15-14-00-179.jpg" alt="AI Course Banner" class="banner-image">
           <div class="banner-content">
             <h1>Learn AI the Way Industry Builds It.</h1>
             <a href="program.html">Explore curriculum</a>
@@ -1533,7 +1559,7 @@ to India's growth.
         <div class="grid">
           <div class="box">
             <i class="fas fa-medal"></i>
-            <h3>100% Placement</h3>
+            <h3>100% Placement Assistance</h3>
             <p>Guaranteed job placement with top companies</p>
           </div>
           <div class="box">
@@ -1623,6 +1649,7 @@ to India's growth.
     </div>    
 
     <div id="page5">
+      <h2>Our Success Story</h2>
       <div class="marquee3d">
         <!-- Column 1 -->
         <div class="marquee-column">
@@ -1967,8 +1994,8 @@ to India's growth.
     </div>
 
     <div id="page6">
-      <h2>Our Success Stories</h2>
-      <p>Students placed in top companies</p>
+      <h2>Our Intern Have Been Hired By</h2>
+      <p>top companies</p>
       <div class="marquee-container">
         <div class="fade left"></div>
     
@@ -2337,17 +2364,3 @@ to India's growth.
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
