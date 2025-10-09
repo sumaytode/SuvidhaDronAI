@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publications - DronAI</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+    
+    /* Navbar */
+    nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+nav:hover {
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+}
+
+.logo { 
+  font-weight: 700;
+  font-size: 25px;
+  transition: transform 0.3s ease;
+}
+
+nav a img {
+  transition: transform 0.3s ease;
+}
+
+nav a:hover img {
+  transform: scale(1.05);
+}
+
+/* Button (hamburger) */
+.menu-toggle {
+  display: none;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(251, 191, 36, 0.3);
+}
+
+.menu-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(251, 191, 36, 0.4);
+}
+
+/* Menu (desktop) */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+nav ul li {
+  position: relative;
+}
+
+nav ul li a {
+  color: #1f2937;
+  text-decoration: none;
+  background-color: #ffffff4d;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+nav ul li a::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #f59e0b;
+  background: rgba(251, 191, 36, 0.1);
+}
+
+nav ul li a:hover::before {
+  width: 80%;
+}
+
+/* Mobile: collapse menu and show button */
+@media (max-width: 768px) {
+  nav {
+    padding: 15px 25px;
+  }
+
+  .menu-toggle { 
+    display: block;
+  }
+
+  nav ul {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: 20px;
+    width: 250px;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(15px);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+  }
+
+  nav ul.show { 
+    display: flex;
+    animation: slideDown 0.3s ease;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  nav ul li { 
+    margin: 8px 0;
+    width: 100%;
+  }
+
+  nav ul li a {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 12px 16px;
+  }
+
+  nav ul li a::before {
+    display: none;
+  }
+
+  nav ul li a:hover {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(245, 158, 11, 0.2) 100%);
+    transform: translateX(5px);
+  }
+}
+
+@media (max-width: 480px) {
+  nav {
+    padding: 12px 20px;
+  }
+
+  nav ul {
+    right: 10px;
+    width: calc(100vw - 40px);
+  }
+}
+    /* Page Heading */
+    .page-heading {
+      background: linear-gradient(135deg, #811e8a 0%, #e63bf6 100%);
+      padding: 100px 20px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .flagship-badge {
+      display: inline-block;
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50px;
+      color: white;
+      font-size: 14px;
+      font-weight: 500;
+      backdrop-filter: blur(10px);
+      margin-bottom: 20px;
+    }
+
+    .page-heading h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .page-heading p {
+      font-size: 1.25rem;
+      color: #d1d5db;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Publications Section */
+    .publications-section {
+      padding: 80px 20px;
+      background: linear-gradient(135deg, #f8f5ff 0%, #fff9e6 100%);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .search-filter-bar {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(94, 0, 138, 0.1);
+      margin-bottom: 30px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 250px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 12px 45px 12px 15px;
+      border: 2px solid #e5e7eb;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: #fbbf24;
+    }
+
+    .search-box i {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9ca3af;
+    }
+
+    .filter-select {
+      padding: 12px 15px;
+      border: 2px solid #e5e7eb;
+      border-radius: 10px;
+      font-size: 1rem;
+      background: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .filter-select:focus {
+      outline: none;
+      border-color: #fbbf24;
+    }
+
+    /* Table Styles */
+    .publications-table-wrapper {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(94, 0, 138, 0.1);
+      overflow: hidden;
+    }
+
+    .publications-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .publications-table thead {
+      background: linear-gradient(135deg, #5e008a 0%, #7a1cad 100%);
+      color: white;
+    }
+
+    .publications-table thead th {
+      padding: 20px 15px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .publications-table tbody tr {
+      border-bottom: 1px solid #f3f4f6;
+      transition: all 0.3s ease;
+    }
+
+    .publications-table tbody tr:hover {
+      background: linear-gradient(135deg, #fff9e6, #f8f5ff);
+      transform: scale(1.01);
+    }
+
+    .publications-table tbody td {
+      padding: 18px 15px;
+      color: #4a4a4a;
+    }
+
+    .publications-table tbody td:first-child {
+      font-weight: 600;
+      color: #5e008a;
+      width: 80px;
+      text-align: center;
+    }
+
+    .paper-title {
+      font-weight: 600;
+      color: #1f2937;
+      line-height: 1.5;
+    }
+
+    .author-name {
+      color: #666;
+      font-size: 0.95rem;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .status-review {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .status-published {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .status-accepted {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .pagination button {
+      padding: 10px 16px;
+      border: 2px solid #e5e7eb;
+      background: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .pagination button:hover {
+      background: #fbbf24;
+      border-color: #fbbf24;
+      color: white;
+    }
+
+    .pagination button.active {
+      background: #5e008a;
+      border-color: #5e008a;
+      color: white;
+    }
+
+    .pagination button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .page-heading h1 { font-size: 2rem; }
+      .publications-table { display: block; overflow-x: auto; }
+      .search-filter-bar { flex-direction: column; }
+      .search-box { min-width: 100%; }
+    }
+
+    /* Footer */
+    #footer {
+  background: #5e008a;
+  color: #ffffff;
+  padding: 50px 20px 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 40px; /* ✅ evenly spaced gap between columns */
+}
+
+.footer-col {
+  flex: 1 1 250px; /* ✅ makes each column take equal width */
+  min-width: 220px; /* ✅ prevents columns from shrinking too small */
+}
+
+.quick-links {
+  flex: 0 1 180px; /* Reduce width */
+}
+
+.social-media {
+  margin-top: 30px; /* Adds vertical space */
+}
+
+@media (max-width: 768px) {
+  .social-media {
+    margin-top: 50px; /* Increase spacing on smaller screens */
+  }
+
+  .quick-links {
+    align-self: center; /* Center it visually on narrow viewports */
+  }
+}
+
+
+
+.footer-col h3 {
+  font-size: 22px;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.footer-col h4 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+.footer-col p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #ccc;
+}
+
+/* ✅ Add consistent spacing for lists */
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+  text-decoration: none;
+  color: #ddd;
+  transition: color 0.3s;
+}
+
+.footer-col ul li a:hover {
+  color: #ffcc33;
+}
+
+/* ✅ Social Links with equal spacing */
+.social-links {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.social-links a {
+  font-size: 20px;
+  color: #ddd;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.social-links a:hover {
+  color: #ffcc33;
+  transform: translateY(-3px);
+}
+
+/* ✅ Bottom Bar */
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  border-top: 1px solid #444;
+  padding-top: 15px;
+}
+
+.footer-bottom p {
+  font-size: 14px;
+  color: #bbb;
+}
+
+/* ✅ Responsive adjustments */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+}
+  </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html"  class="flex items-center flex-shrink-0 page-link" data-page="home">
+          <img src="https://i.ibb.co/DPxTrnv2/Dron-AILogo-1.png" alt="DronAI Logo" class="h-14">
+      </a>
+    
+        <!-- accessible button instead of span/onclick -->
+        <button class="menu-toggle"
+                aria-controls="menu"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+          ☰
+        </button>
+    
+        <ul id="menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="About.html">About</a></li>
+          <li><a href="program.html" >Program</a></li>
+          <li><a href="Publications.html">Publication</a></li>
+          <li><a href="#Projects">Projects</a></li>
+          <li><a href="#Mentors">Mentors</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+  <div class="page-heading">
+    <div class="container">
+      <div class="flagship-badge">
+        <i class="fas fa-book-open"></i> RESEARCH PUBLICATIONS
+      </div>
+      <h1>Our Research Publications</h1>
+      <p>Showcasing cutting-edge AI research and innovations by our students and mentors</p>
+    </div>
+  </div>
+
+  <section class="publications-section">
+    <div class="container">
+      <div class="search-filter-bar">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Search by title, author, or keywords...">
+          <i class="fas fa-search"></i>
+        </div>
+        <select class="filter-select" id="statusFilter">
+          <option value="all">All Status</option>
+          <option value="review">Under Review</option>
+          <option value="accepted">Accepted</option>
+          <option value="published">Published</option>
+        </select>
+      </div>
+
+      <div class="publications-table-wrapper">
+        <table class="publications-table">
+          <thead>
+            <tr>
+              <th>S.No.</th>
+              <th>Paper Title</th>
+              <th>Author</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="publicationsBody">
+            <!-- Publications will be loaded here -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination" id="pagination">
+        <!-- Pagination buttons will be added here -->
+      </div>
+    </div>
+  </section>
+
+  <footer id="footer">
+    <div class="footer-container">
+      <!-- Column 1 - Brand -->
+      <div class="footer-col">
+        <h3>DronAI</h3>
+        <p>Empowering the next generation of AI innovators. An initiative by Suvidha Foundation.</p>
+      </div>
+  
+      <!-- Column 2 - Quick Links -->
+      <div class="footer-col quick-links">
+
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="About.html">About</a></li>
+          <li><a href="program.html">Program</a></li>
+          <li><a href="#Publication">Publication</a></li>
+          <li><a href="#Projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+  
+      <!-- Column 3 - Contact Info -->
+      <div class="footer-col">
+        <h4>Office Headquarters</h4>
+        <address>
+          <p><i class="fas fa-map-marker-alt"></i> <b>Nagpur Headquarter:</b>
+            Suvidha Foundation, Motghare Bhavan, Ward No. 4, Santnagar, Annamod, Near Water Tank, Khaperkheda, Saoner, Nagpur, Maharashtra, India Pincode - 441102
+            </p>
+          <p><i class="fas fa-map-marker-alt"></i> <b>Hyderabad Headquarter:</b>
+            Vazhra Nirman Pushpak, C Block 701, 500090, Hyderabad</p>
+          <p><i class="fas fa-envelope"></i> <b>Mail:</b>contact@suvidhafoundation.org</p>
+        </address>
+      </div>
+  
+      <!-- Column 4 - Newsletter -->
+      <!-- <div class="footer-col">
+        <h4>Our Newsletter</h4>
+        <p class="newsletter-text">Subscribe to our newsletter to get our latest updates.</p>
+        <form action="#" class="newsletter-form">
+          <input type="email" placeholder="Email address" required>
+          <button type="submit"><i class="fas fa-paper-plane"></i></button>
+        </form>
+      </div> -->
+  
+      <!-- Column 5 - Social Links -->
+      <div class="footer-col social-media">
+
+        <h4>Follow Us</h4>
+        <div class="social-links">
+          <!-- <a href="https://www.facebook.com/suvidhamahilamandal" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a> -->
+          <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a href="https://in.linkedin.com/company/suvidha-foundation" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/suvidha_mahila_mandal/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+  
+    <div class="footer-bottom">
+      <p>&copy; 2025 Dronacharya School of AI. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+
+(function () {
+    const nav = document.querySelector('nav');
+    const toggle = nav.querySelector('.menu-toggle');
+    const menu = nav.querySelector('#menu');
+
+    if (!toggle || !menu) {
+      console.error('Menu toggle or menu element not found');
+      return;
+    }
+
+    // Toggle menu on button click
+    toggle.addEventListener('click', function (e) {
+      const isOpen = menu.classList.toggle('show');
+      // update accessibility attribute
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    // Close when any menu link is clicked (useful for single page)
+    menu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        if (menu.classList.contains('show')) {
+          menu.classList.remove('show');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
+    // Close when clicking outside the nav (mobile)
+    document.addEventListener('click', (evt) => {
+      if (!nav.contains(evt.target) && menu.classList.contains('show')) {
+        menu.classList.remove('show');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Optional: close menu on ESC key
+    document.addEventListener('keydown', (evt) => {
+      if (evt.key === 'Escape' && menu.classList.contains('show')) {
+        menu.classList.remove('show');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
+    // Publications Data
+    const publications = [
+      { title: "Optimizing ReFT-Driven Transformers for Clinical Summarization: A Benchmark Study", author: "Pranali Baviskar", status: "review" },
+      { title: "Sentiment-Augmented Transformer Models for Robust Fake News Detection: A Comparative Study with BERT and RoBERTa", author: "Aryakumar Mishra", status: "review" },
+      { title: "Leveraging Deep Learning for Nutritional Profiling: A Comparative Analysis of EfficientNetB0, MobileNetV2, and ResNet50", author: "Niraj Jagannath Rawool", status: "review" },
+      { title: "Towards Transparent and Accurate Diabetes Prediction Using Deep Learning and Explainable Artificial Intelligence", author: "Yash Vivek Sawant", status: "review" },
+      { title: "Text as Graphs: Enabling Explainable NLP Through Graph Neural Network Architectures", author: "Hrutuja Kharat", status: "review" },
+      { title: "Transformers Library: A Unified Framework for Pretrained NLP Model Access, Fine-Tuning, and Deployment", author: "Shivanshu Pandey", status: "review" },
+      { title: "Advancing Abstractive Summarization of Patent Documents Using Integrated Machine Learning Architectures", author: "Vedant Sandeep Shelar", status: "review" },
+      { title: "From Research to Innovation: Transforming LLM Two-Stage Dialogue Summarization Techniques", author: "Anuj Koli", status: "review" },
+      { title: "Meta-Path-Based Fake News Detection: A Literature Review on Leveraging Multi-Level Social Context Information", author: "Saiel Lad", status: "review" },
+      { title: "Enhancing Children's Learning with Familiar Voices: A Transformer-Based Text-to-Speech System", author: "Anushree Bhagwatkar", status: "review" },
+      { title: "Revolutionizing Pedagogy with AI: Leveraging RAG-Based Transformer Models for Enhancing Student Education", author: "Harsh Rawte", status: "review" },
+      { title: "Sign2Text: Converting Sign Language to Text Using MediaPipe and NLP", author: "Atharv Patil", status: "review" },
+      { title: "Advancing Personalized Nutrition with Large Language Models: AI-Driven Approaches", author: "Abhinav Upadhyay", status: "review" },
+      { title: "Large Language Models Help Reveal Unhealthy Diet and Body Concerns in Online Eating Disorders Communities", author: "Shreyas Chavan", status: "review" },
+      { title: "Enhancing Code Understanding from Unofficial Documentation Using Abstractive Deep Learning Models", author: "Tejas Kunde", status: "review" }
+    ];
+
+    // Pagination variables
+    let currentPage = 1;
+    const itemsPerPage = 10;
+    let filteredPublications = [...publications];
+
+    // Render publications
+    function renderPublications() {
+      const tbody = document.getElementById('publicationsBody');
+      tbody.innerHTML = '';
+      
+      const start = (currentPage - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      const paginatedItems = filteredPublications.slice(start, end);
+
+      paginatedItems.forEach((pub, index) => {
+        const row = document.createElement('tr');
+        const statusClass = `status-${pub.status}`;
+        const statusText = pub.status.charAt(0).toUpperCase() + pub.status.slice(1);
+        
+        row.innerHTML = `
+          <td>${start + index + 1}</td>
+          <td class="paper-title">${pub.title}</td>
+          <td class="author-name">${pub.author}</td>
+          <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+        `;
+        tbody.appendChild(row);
+      });
+
+      renderPagination();
+    }
+
+    // Render pagination
+    function renderPagination() {
+      const pagination = document.getElementById('pagination');
+      const totalPages = Math.ceil(filteredPublications.length / itemsPerPage);
+      pagination.innerHTML = '';
+
+      const prevBtn = document.createElement('button');
+      prevBtn.textContent = '← Previous';
+      prevBtn.disabled = currentPage === 1;
+      prevBtn.onclick = () => { currentPage--; renderPublications(); };
+      pagination.appendChild(prevBtn);
+
+      for (let i = 1; i <= totalPages; i++) {
+        const pageBtn = document.createElement('button');
+        pageBtn.textContent = i;
+        pageBtn.className = i === currentPage ? 'active' : '';
+        pageBtn.onclick = () => { currentPage = i; renderPublications(); };
+        pagination.appendChild(pageBtn);
+      }
+
+      const nextBtn = document.createElement('button');
+      nextBtn.textContent = 'Next →';
+      nextBtn.disabled = currentPage === totalPages;
+      nextBtn.onclick = () => { currentPage++; renderPublications(); };
+      pagination.appendChild(nextBtn);
+    }
+
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase();
+      filteredPublications = publications.filter(pub => 
+        pub.title.toLowerCase().includes(query) || 
+        pub.author.toLowerCase().includes(query)
+      );
+      currentPage = 1;
+      renderPublications();
+    });
+
+    // Filter functionality
+    document.getElementById('statusFilter').addEventListener('change', (e) => {
+      const status = e.target.value;
+      filteredPublications = status === 'all' 
+        ? [...publications]
+        : publications.filter(pub => pub.status === status);
+      currentPage = 1;
+      renderPublications();
+    });
+
+    // Menu toggle
+    document.querySelector('.menu-toggle').addEventListener('click', () => {
+      document.getElementById('menu').classList.toggle('show');
+    });
+
+    // Initial render
+    renderPublications();
+  </script>
+</body>
+</html>
