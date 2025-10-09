@@ -312,6 +312,64 @@ nav ul li a:hover::before {
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
     }
 
+    .slide .banner3 {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* make it full screen for better banner effect */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.slide .banner-image3 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(60%); /* darken image slightly for text contrast */
+}
+
+.banner-content3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  z-index: 2;
+  width: 90%;
+  max-width: 800px;
+  padding: 20px;
+}
+
+/* Heading styling */
+.banner-content3 h1 {
+  background: rgba(204, 0, 255, 0.15);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  padding: 20px 30px;
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: 1px;
+  line-height: 1.3;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* Paragraph styling */
+.banner-content3 p {
+  background: rgba(0, 0, 0, 0.55);
+  border-left: 4px solid #8b5cf6; /* accent color */
+  padding: 15px 25px;
+  border-radius: 10px;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  font-weight: 500;
+  line-height: 1.6;
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
     /* Navigation Arrows */
     .slider-nav {
       position: absolute;
@@ -480,7 +538,7 @@ nav ul li a:hover::before {
     }
 
     #page2-left h1 {
-      font-size: 2.5vw;
+      font-size: 2.0vw;
       font-weight: 700;
       color: #5e008a;
       margin-bottom: 20px;
@@ -500,7 +558,7 @@ nav ul li a:hover::before {
     }
 
     #page2-left p {
-      font-size: 1.1rem;
+      font-size: 1.0rem;
       font-weight: 400;
       color: #4a4a4a;
       line-height: 1.8;
@@ -652,6 +710,7 @@ nav ul li a:hover::before {
   background: linear-gradient(135deg, #fff9e6 0%, #f8f5ff 100%);
   position: relative;
   display: flex;
+  text-align: center;
   align-items: center;
   flex-direction: column;
   border-top: 1px solid #fff;
@@ -780,7 +839,7 @@ nav ul li a:hover::before {
   font-size: 1rem;
   line-height: 1.8;
   color: #666;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
 }
 
 .course-btn {
@@ -1466,7 +1525,7 @@ nav ul li a:hover::before {
       <div class="slider-container">
       <!-- Slide 1 -->
       <div class="slide active">
-        <img src="s11.png" alt="Slide 1">
+        <img src="16.9 picture.png" alt="Slide 1">
       </div>
 
       <!-- Slide 2 -->
@@ -1476,7 +1535,13 @@ nav ul li a:hover::before {
 
       <!-- Slide 3 -->
       <div class="slide">
-        <img src="JOIN IN A COMMUNITY (5).png" alt="Slide 3">
+        <div class="banner3">
+          <img src="JOIN IN A COMMUNITY (5).png" alt="Slide 3" class="banner-image3">
+          <div class="banner-content3">
+            <h1>Join A Community Of 10,000+ Learners & Innovators</h1>
+            <p>Be part of a vibrant network of AI enthusiasts, mentors, and professionals who share knowlegde and opportunities</p>
+          </div>
+        </div>
       </div>
 
       <!-- Slide 4 -->
@@ -1492,7 +1557,7 @@ nav ul li a:hover::before {
       <!-- Slide 6 - Banner Slide -->
       <div class="slide">
         <div class="banner">
-          <img src="Picsart_25-10-09_15-14-00-179.jpg" alt="AI Course Banner" class="banner-image">
+          <img src="https://i.postimg.cc/cH8BRwC4/Picsart-25-10-09-15-14-00-179.jpg" alt="AI Course Banner" class="banner-image">
           <div class="banner-content">
             <h1>Learn AI the Way Industry Builds It.</h1>
             <a href="program.html">Explore curriculum</a>
@@ -1538,7 +1603,7 @@ nav ul li a:hover::before {
     
     <div id="page2">
       <div id="page2-left">
-        <h1>About DronAI</h1>
+        <h1>Welcome To Dronacharya School Of Artificial Intelligence and Deep Learning</h1>
         <p>
           At Dron-AI, we are building India's AI talent pipeline to position
 the nation as Vishwaguru in technology. We offer a free,
@@ -1658,12 +1723,12 @@ to India's growth.
               <div class="review-header">
                 <img src="https://avatar.vercel.sh/jack" alt="User Avatar">
                 <div>
-                  <h4>Ned Stark</h4>
-                  <p>@nedstark</p>
+                  <h4>Sudheesh Shetty</h4>
+                  <p>TechCorp Analytics</p>
                 </div>
               </div>
               <div class="review-body">
-                The courses are beginner-friendly and easy to follow. Highly recommended!
+                "Dron AI's deep dive into NLP was game-changing for my current project. Highly recommend!"
               </div>
             </div>
     
@@ -1671,12 +1736,12 @@ to India's growth.
               <div class="review-header">
                 <img src="https://avatar.vercel.sh/jill" alt="User Avatar">
                 <div>
-                  <h4>Robb Stark</h4>
-                  <p>@robbstark</p>
+                  <h4>Anchal Sekhri</h4>
+                  <p>Global Innovations</p>
                 </div>
               </div>
               <div class="review-body">
-                I gained practical skills that I could apply immediately in my work.
+                "Suvidha's personalized mentorship helped me master advanced neural networks. Fantastic course structure."
               </div>
             </div>
     
@@ -1684,12 +1749,12 @@ to India's growth.
               <div class="review-header">
                 <img src="https://avatar.vercel.sh/john" alt="User Avatar">
                 <div>
-                  <h4>John Snow</h4>
-                  <p>@johnsnow</p>
+                  <h4>Triveni Mamidala</h4>
+                  <p>Future Solutions Ltd.</p>
                 </div>
               </div>
               <div class="review-body">
-                Great mentors who explain concepts clearly and patiently.
+                "The practical projects at Suvidha were instrumental in landing my first job in software development."
               </div>
             </div>
     
@@ -1698,12 +1763,12 @@ to India's growth.
               <div class="review-header">
                 <img src="https://avatar.vercel.sh/jack" alt="User Avatar">
                 <div>
-                  <h4>Ned Stark</h4>
-                  <p>@nedstark</p>
+                  <h4>Tushar Rastogi</h4>
+                  <p>ByteStream Digital</p>
                 </div>
               </div>
               <div class="review-body">
-                The courses are beginner-friendly and easy to follow. Highly recommended!
+                "The mix of front-end and Dron AI backend concepts was perfect for becoming a versatile developer."
               </div>
             </div>
     
@@ -1711,12 +1776,12 @@ to India's growth.
               <div class="review-header">
                 <img src="https://avatar.vercel.sh/jill" alt="User Avatar">
                 <div>
-                  <h4>Robb Stark</h4>
-                  <p>@robbstark</p>
+                  <h4>Amit Singh</h4>
+                  <p>FinSight Consulting</p>
                 </div>
               </div>
               <div class="review-body">
-                I gained practical skills that I could apply immediately in my work.
+                "Dron AI made complex data visualization simple and actionable. Huge value for money."
               </div>
             </div>
     
@@ -1724,12 +1789,12 @@ to India's growth.
               <div class="review-header">
                 <img src="https://avatar.vercel.sh/john" alt="User Avatar">
                 <div>
-                  <h4>John Snow</h4>
-                  <p>@johnsnow</p>
+                  <h4>Avnish Rajput</h4>
+                  <p>Innovatech Labs</p>
                 </div>
               </div>
               <div class="review-body">
-                Great mentors who explain concepts clearly and patiently.
+                "The ML modules at Suvidha gave me a strong theoretical and practical foundation for my internship.".
               </div>
             </div>
           </div>
@@ -1742,12 +1807,12 @@ to India's growth.
               <div class="review-header">
                 <img src="https://avatar.vercel.sh/sarah" alt="User Avatar">
                 <div>
-                  <h4>Arya Stark</h4>
-                  <p>@aryastark</p>
+                  <h4>Priya Sharma</h4>
+                  <p>SkyNet Services</p>
                 </div>
               </div>
               <div class="review-body">
-                I don't know what to say. I'm speechless. This is amazing and life-changing!
+                "I appreciated the focus on cloud infrastructure integration with AI/ML models in the Dron AI course."
               </div>
             </div>
     
@@ -1755,12 +1820,12 @@ to India's growth.
               <div class="review-header">
                 <img src="https://avatar.vercel.sh/mike" alt="User Avatar">
                 <div>
-                  <h4>Lady Stark</h4>
-                  <p>@ladystark</p>
+                  <h4>Rahul Verma</h4>
+                  <p>CodeCraft Software</p>
                 </div>
               </div>
               <div class="review-body">
-                I've never seen anything like this before. The teaching quality is exceptional.
+                "Suvidha taught me how to deploy scalable applications. Real-world skills that matter.".
               </div>
             </div>
     
@@ -1768,12 +1833,12 @@ to India's growth.
               <div class="review-header">
                 <img src="https://avatar.vercel.sh/david" alt="User Avatar">
                 <div>
-                  <h4>Tywin Lannister</h4>
-                  <p>@tywinlannister</p>
+                  <h4>Neha Gupta</h4>
+                  <p>BrandPulse Agency</p>
                 </div>
               </div>
               <div class="review-body">
-                I'm at a loss for words. This program exceeded all my expectations.
+                "The data-driven marketing module powered by Dron AI tools was incredibly useful for my role."
               </div>
             </div>
     
@@ -1782,12 +1847,12 @@ to India's growth.
               <div class="review-header">
                 <img src="https://avatar.vercel.sh/sarah" alt="User Avatar">
                 <div>
-                  <h4>Arya Stark</h4>
-                  <p>@aryastark</p>
+                  <h4>Vikas Kumar</h4>
+                  <p>GlobalOps Platform</p>
                 </div>
               </div>
               <div class="review-body">
-                I don't know what to say. I'm speechless. This is amazing and life-changing!
+                "Learned seamless CI/CD for ML models—a game changer thanks to the Dron AI training."
               </div>
             </div>
     
@@ -1795,12 +1860,12 @@ to India's growth.
               <div class="review-header">
                 <img src="https://avatar.vercel.sh/mike" alt="User Avatar">
                 <div>
-                  <h4>Lady Stark</h4>
-                  <p>@ladystark</p>
+                  <h4>Sneha Reddy</h4>
+                  <p>NexGen Products</p>
                 </div>
               </div>
               <div class="review-body">
-                I've never seen anything like this before. The teaching quality is exceptional.
+                "The focus on data ethics and model governance from Suvidha is vital for product development today."
               </div>
             </div>
     
@@ -1808,12 +1873,12 @@ to India's growth.
               <div class="review-header">
                 <img src="https://avatar.vercel.sh/david" alt="User Avatar">
                 <div>
-                  <h4>Tywin Lannister</h4>
-                  <p>@tywinlannister</p>
+                  <h4>Arjun Nair</h4>
+                  <p>Creative Hive Studios</p>
                 </div>
               </div>
               <div class="review-body">
-                I'm at a loss for words. This program exceeded all my expectations.
+                "Understanding how users interact with AI models was clarified perfectly by the Suvidha team."
               </div>
             </div>
           </div>
@@ -1826,12 +1891,12 @@ to India's growth.
               <div class="review-header">
                 <img src="https://avatar.vercel.sh/alex" alt="User Avatar">
                 <div>
-                  <h4>Tyrion Lannister</h4>
-                  <p>@tyrionlannister</p>
+                  <h4>Kavya S.</h4>
+                  <p>Guardian Defense</p>
                 </div>
               </div>
               <div class="review-body">
-                The hands-on projects really helped solidify my understanding of AI concepts.
+                "Dron AI's security practices overview for large datasets was a key takeaway for my domain."
               </div>
             </div>
     
@@ -1839,12 +1904,12 @@ to India's growth.
               <div class="review-header">
                 <img src="https://avatar.vercel.sh/emma" alt="User Avatar">
                 <div>
-                  <h4>Sansa Stark</h4>
-                  <p>@sansastark</p>
+                  <h4>Manish Doshi</h4>
+                  <p>Zenith Capital</p>
                 </div>
               </div>
               <div class="review-body">
-                The support from the community and mentors is outstanding. Worth every penny!
+                "The time series analysis models covered by Dron AI directly improved my predictive modeling accuracy."
               </div>
             </div>
     
@@ -1852,12 +1917,12 @@ to India's growth.
               <div class="review-header">
                 <img src="https://avatar.vercel.sh/chris" alt="User Avatar">
                 <div>
-                  <h4>Ramsey Bolton</h4>
-                  <p>@ramseybolton</p>
+                  <h4>Aisha Khan</h4>
+                  <p>Enterprise Solutions</p>
                 </div>
               </div>
               <div class="review-body">
-                Perfect blend of theory and practical application. Couldn't ask for more!
+                "Suvidha helped me bridge the gap between business needs and technical AI capabilities."
               </div>
             </div>
     
@@ -1866,12 +1931,12 @@ to India's growth.
               <div class="review-header">
                 <img src="https://avatar.vercel.sh/alex" alt="User Avatar">
                 <div>
-                  <h4>Tyrion Lannister</h4>
-                  <p>@tyrionlannister</p>
+                  <h4>Siddharth Rao</h4>
+                  <p>AppGenie Inc.</p>
                 </div>
               </div>
               <div class="review-body">
-                The hands-on projects really helped solidify my understanding of AI concepts.
+                "Integrating ML models into mobile platforms became straightforward after the Dron AI workshop."
               </div>
             </div>
     
@@ -1879,12 +1944,12 @@ to India's growth.
               <div class="review-header">
                 <img src="https://avatar.vercel.sh/emma" alt="User Avatar">
                 <div>
-                  <h4>Sansa Stark</h4>
-                  <p>@sansastark</p>
+                  <h4>Deepa Joshi</h4>
+                  <p>TestAssured Services</p>
                 </div>
               </div>
               <div class="review-body">
-                The support from the community and mentors is outstanding. Worth every penny!
+                "The training on testing ML pipelines at Suvidha is essential for any modern QA team."
               </div>
             </div>
     
@@ -1892,12 +1957,12 @@ to India's growth.
               <div class="review-header">
                 <img src="https://avatar.vercel.sh/chris" alt="User Avatar">
                 <div>
-                  <h4>Ramsey Bolton</h4>
-                  <p>@ramseybolton</p>
+                  <h4>Gaurav Mehta</h4>
+                  <p>Connect Telecom</p>
                 </div>
               </div>
               <div class="review-body">
-                Perfect blend of theory and practical application. Couldn't ask for more!
+                "I now use Dron AI principles to optimize network traffic flow and predict bottlenecks. Great course!"
               </div>
             </div>
           </div>
@@ -1910,12 +1975,12 @@ to India's growth.
               <div class="review-header">
                 <img src="https://avatar.vercel.sh/lucas" alt="User Avatar">
                 <div>
-                  <h4>Bran Stark</h4>
-                  <p>@branstark</p>
+                  <h4>Tanvi Kale</h4>
+                  <p>WordFlow Media</p>
                 </div>
               </div>
               <div class="review-body">
-                This course opened up so many career opportunities for me. Truly grateful!
+                "Suvidha's guidance on content generation models has revolutionized my strategy."
               </div>
             </div>
     
@@ -1923,12 +1988,12 @@ to India's growth.
               <div class="review-header">
                 <img src="https://avatar.vercel.sh/olivia" alt="User Avatar">
                 <div>
-                  <h4>Hodor</h4>
-                  <p>@hodor</p>
+                  <h4>Rohit Singla</h4>
+                  <p>DataPipe Systems</p>
                 </div>
               </div>
               <div class="review-body">
-                The curriculum is well-structured and the pace is perfect for learning.
+                "The curriculum on MLOps infrastructure was highly practical and immediately applicable to my job."
               </div>
             </div>
     
@@ -1936,12 +2001,12 @@ to India's growth.
               <div class="review-header">
                 <img src="https://avatar.vercel.sh/ryan" alt="User Avatar">
                 <div>
-                  <h4>Jaime Lannister</h4>
-                  <p>@jaimelannister</p>
+                  <h4>Shweta Jha</h4>
+                  <p>AutoProcess Consulting</p>
                 </div>
               </div>
               <div class="review-body">
-                Best investment I've made in my career. The ROI is incredible!
+                "Using Dron AI to enhance robotic process automation was the highlight of the training."
               </div>
             </div>
     
@@ -1950,12 +2015,12 @@ to India's growth.
               <div class="review-header">
                 <img src="https://avatar.vercel.sh/lucas" alt="User Avatar">
                 <div>
-                  <h4>Bran Stark</h4>
-                  <p>@branstark</p>
+                  <h4>Kunal Desai</h4>
+                  <p>Insights Data Corp</p>
                 </div>
               </div>
               <div class="review-body">
-                This course opened up so many career opportunities for me. Truly grateful!
+                "Suvidha provided the context needed to transition from traditional BI to advanced predictive analytics."
               </div>
             </div>
     
@@ -1963,12 +2028,12 @@ to India's growth.
               <div class="review-header">
                 <img src="https://avatar.vercel.sh/olivia" alt="User Avatar">
                 <div>
-                  <h4>Hodor</h4>
-                  <p>@hodor</p>
+                  <h4>Meena V.</h4>
+                  <p>FutureTech R&D</p>
                 </div>
               </div>
               <div class="review-body">
-                The curriculum is well-structured and the pace is perfect for learning.
+                "The depth of coverage on reinforcement learning by Dron AI exceeded my academic expectations."
               </div>
             </div>
     
@@ -1976,12 +2041,12 @@ to India's growth.
               <div class="review-header">
                 <img src="https://avatar.vercel.sh/ryan" alt="User Avatar">
                 <div>
-                  <h4>Jaime Lannister</h4>
-                  <p>@jaimelannister</p>
+                  <h4>Hari Prasad</h4>
+                  <p>SmartHome Systems</p>
                 </div>
               </div>
               <div class="review-body">
-                Best investment I've made in my career. The ROI is incredible!
+                "Learned how to deploy small, efficient ML models on edge devices, thanks to Suvidha."
               </div>
             </div>
           </div>
@@ -2050,13 +2115,26 @@ to India's growth.
     
         <!-- Column 3 - Contact Info -->
         <div class="footer-col">
-          <h4>Contact Info</h4>
+          <h4>Office Headquarters</h4>
           <address>
-            <p><i class="fas fa-map-marker-alt"></i> Nagpur, Maharashtra, India</p>
-            <p><i class="fas fa-map-marker-alt"></i> Hyderabad, Maharashtra, India</p>
-            <p><i class="fas fa-envelope"></i> contact@suvidhafoundation.org</p>
+            <p><i class="fas fa-map-marker-alt"></i> <b>Nagpur Headquarter:</b>
+              Suvidha Foundation, Motghare Bhavan, Ward No. 4, Santnagar, Annamod, Near Water Tank, Khaperkheda, Saoner, Nagpur, Maharashtra, India Pincode - 441102
+              </p>
+            <p><i class="fas fa-map-marker-alt"></i> <b>Hyderabad Headquarter:</b>
+              Vazhra Nirman Pushpak, C Block 701, 500090, Hyderabad</p>
+            <p><i class="fas fa-envelope"></i> <b>Mail:</b>contact@suvidhafoundation.org</p>
           </address>
         </div>
+    
+        <!-- Column 4 - Newsletter -->
+        <!-- <div class="footer-col">
+          <h4>Our Newsletter</h4>
+          <p class="newsletter-text">Subscribe to our newsletter to get our latest updates.</p>
+          <form action="#" class="newsletter-form">
+            <input type="email" placeholder="Email address" required>
+            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+          </form>
+        </div> -->
     
         <!-- Column 5 - Social Links -->
         <div class="footer-col">
@@ -2356,5 +2434,3 @@ to India's growth.
 </script>
 </body>
 </html>
-
-
