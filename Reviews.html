@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Success Stories - DronAI</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+    
+    /* Navbar - EXACT COPY */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    nav:hover {
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .logo { 
+      font-weight: 700;
+      font-size: 25px;
+      transition: transform 0.3s ease;
+    }
+
+    nav a img {
+      transition: transform 0.3s ease;
+    }
+
+    nav a:hover img {
+      transform: scale(1.05);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+      border: none;
+      color: white;
+      font-size: 22px;
+      cursor: pointer;
+      padding: 10px 15px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(251, 191, 36, 0.3);
+    }
+
+    .menu-toggle:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(251, 191, 36, 0.4);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav ul li a {
+      color: #1f2937;
+      text-decoration: none;
+      background-color: #ffffff4d;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    nav ul li a::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 3px;
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #f59e0b;
+      background: rgba(251, 191, 36, 0.1);
+    }
+
+    nav ul li a:hover::before {
+      width: 80%;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 15px 25px;
+      }
+
+      .menu-toggle { 
+        display: block;
+      }
+
+      nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 20px;
+        width: 250px;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(15px);
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        margin-top: 10px;
+      }
+
+      nav ul.show { 
+        display: flex;
+        animation: slideDown 0.3s ease;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      nav ul li { 
+        margin: 8px 0;
+        width: 100%;
+      }
+
+      nav ul li a {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 12px 16px;
+      }
+
+      nav ul li a::before {
+        display: none;
+      }
+
+      nav ul li a:hover {
+        background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(245, 158, 11, 0.2) 100%);
+        transform: translateX(5px);
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav {
+        padding: 12px 20px;
+      }
+
+      nav ul {
+        right: 10px;
+        width: calc(100vw - 40px);
+      }
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Page Heading */
+    .page-heading {
+      background: linear-gradient(135deg, #811e8a 0%, #e63bf6 100%);
+      padding: 120px 20px 80px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-heading::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".1" fill="%23ffffff"/></svg>') repeat-x;
+      background-size: cover;
+      opacity: 0.1;
+    }
+
+    .page-heading h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .page-heading p {
+      font-size: 1.25rem;
+      color: #d1d5db;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Main Content Container */
+    .main-content {
+      background: linear-gradient(135deg, #f8f5ff 0%, #fff9e6 100%);
+      padding: 60px 20px;
+      min-height: 60vh;
+    }
+
+    .profile-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .profile-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(94, 0, 138, 0.1);
+      text-align: center;
+      transition: all 0.4s ease;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeUp 0.6s ease forwards;
+      border: 2px solid transparent;
+      position: relative;
+    }
+
+    .profile-card:hover {
+      transform: translateY(-15px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(94, 0, 138, 0.2);
+      border-color: #fbbf24;
+    }
+
+    .profile-image-wrapper {
+      position: relative;
+      width: 100%;
+      height: 280px;
+      overflow: hidden;
+    }
+
+    .profile-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .profile-card:hover img {
+      transform: scale(1.1);
+    }
+
+    /* LinkedIn Icon Overlay */
+    .linkedin-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(94, 0, 138, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .profile-card:hover .linkedin-overlay {
+      opacity: 1;
+    }
+
+    .linkedin-icon {
+      width: 70px;
+      height: 70px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: scale(0.8);
+      transition: transform 0.3s ease;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .profile-card:hover .linkedin-icon {
+      transform: scale(1);
+    }
+
+    .linkedin-icon i {
+      font-size: 35px;
+      color: #0077b5;
+    }
+
+    .profile-info {
+      padding: 20px;
+      background: white;
+      transition: all 0.3s ease;
+    }
+
+    .profile-card:hover .profile-info {
+      background: linear-gradient(135deg, #fff9e6, #f8f5ff);
+    }
+
+    .profile-info h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #5e008a;
+      transition: color 0.3s ease;
+    }
+
+    .profile-card:hover .profile-info h3 {
+      color: #f59e0b;
+    }
+
+    .profile-info p {
+      font-size: 0.9rem;
+      color: #666;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .profile-info .company {
+      font-weight: 600;
+      color: #5e008a;
+      margin-top: 5px;
+      font-size: 0.95rem;
+    }
+
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-top: 50px;
+      padding: 20px;
+    }
+
+    .pagination button {
+      background: linear-gradient(135deg, #5e008a 0%, #811e8a 100%);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(94, 0, 138, 0.3);
+    }
+
+    .pagination button:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(94, 0, 138, 0.4);
+      background: linear-gradient(135deg, #811e8a 0%, #5e008a 100%);
+    }
+
+    .pagination button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .pagination .page-info {
+      font-size: 16px;
+      font-weight: 600;
+      color: #5e008a;
+      padding: 0 15px;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      0% { 
+        opacity: 0; 
+        transform: translateY(40px); 
+      }
+      100% { 
+        opacity: 1; 
+        transform: translateY(0); 
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+      .profile-container {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .page-heading h1 {
+        font-size: 2rem;
+      }
+
+      .page-heading p {
+        font-size: 1rem;
+      }
+
+      .profile-container {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 20px;
+      }
+
+      .profile-image-wrapper {
+        height: 240px;
+      }
+
+      .pagination {
+        flex-wrap: wrap;
+      }
+
+      .pagination button {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .profile-container {
+        grid-template-columns: 1fr;
+      }
+
+      .page-heading h1 {
+        font-size: 1.75rem;
+      }
+    }
+
+    /* Footer - EXACT COPY */
+    #footer {
+      background: #5e008a;
+      color: #ffffff;
+      padding: 50px 20px 20px;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 40px;
+    }
+
+    .footer-col {
+      flex: 1 1 250px;
+      min-width: 220px;
+    }
+
+    .quick-links {
+      flex: 0 1 180px;
+    }
+
+    .social-media {
+      margin-top: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .social-media {
+        margin-top: 50px;
+      }
+
+      .quick-links {
+        align-self: center;
+      }
+    }
+
+    .footer-col h3 {
+      font-size: 22px;
+      color: #fff;
+      margin-bottom: 15px;
+    }
+
+    .footer-col h4 {
+      font-size: 18px;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .footer-col p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #ccc;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-col ul li a {
+      text-decoration: none;
+      color: #ddd;
+      transition: color 0.3s;
+    }
+
+    .footer-col ul li a:hover {
+      color: #ffcc33;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .social-links a {
+      font-size: 20px;
+      color: #ddd;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .social-links a:hover {
+      color: #ffcc33;
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 40px;
+      border-top: 1px solid #444;
+      padding-top: 15px;
+    }
+
+    .footer-bottom p {
+      font-size: 14px;
+      color: #bbb;
+    }
+
+    @media (max-width: 768px) {
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar - EXACT COPY -->
+  <nav>
+    <a href="index.html" class="flex items-center flex-shrink-0 page-link" data-page="home">
+      <img src="https://i.ibb.co/DPxTrnv2/Dron-AILogo-1.png" alt="DronAI Logo" class="h-14">
+    </a>
+
+    <button class="menu-toggle"
+            aria-controls="menu"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+      ☰
+    </button>
+
+    <ul id="menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="About.html">About</a></li>
+      <li><a href="program.html">Program</a></li>
+      <li><a href="Publications.html">Publication</a></li>
+      <li><a href="Projects.html">Projects</a></li>
+      <li><a href="Mentor.html">Mentors</a></li>
+      <li><a href="Contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page Heading -->
+  <div class="page-heading">
+    <div class="container">
+      <h1>Success Stories</h1>
+      <p>Celebrating our alumni who are making waves in the tech industry and beyond.</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div id="profileContainer" class="profile-container">
+      <!-- Cards will be dynamically generated here -->
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      <button id="prevBtn" onclick="changePage(-1)">
+        <i class="fas fa-chevron-left"></i> Previous
+      </button>
+      <div class="page-info">
+        Page <span id="currentPage">1</span> of <span id="totalPages">2</span>
+      </div>
+      <button id="nextBtn" onclick="changePage(1)">
+        Next <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer - EXACT COPY -->
+  <footer id="footer">
+    <div class="footer-container">
+      <!-- Column 1 - Brand -->
+      <div class="footer-col">
+        <h3>DronAI</h3>
+        <p>Empowering the next generation of AI innovators. An initiative by Suvidha Foundation.</p>
+      </div>
+  
+      <!-- Column 2 - Quick Links -->
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="About.html">About</a></li>
+          <li><a href="program.html">Program</a></li>
+          <li><a href="Publications.html">Publication</a></li>
+          <li><a href="Projects.html">Projects</a></li>
+          <li><a href="Mentor.html">Mentors</a></li>
+          <li><a href="Contact.html">Contact</a></li>
+        </ul>
+      </div>
+  
+      <!-- Column 3 - Contact Info -->
+      <div class="footer-col">
+        <h4>Office Headquarters</h4>
+        <address>
+          <p><i class="fas fa-map-marker-alt"></i> <b>Nagpur Headquarter:</b>
+            Suvidha Foundation, Motghare Bhavan, Ward No. 4, Santnagar, Annamod, Near Water Tank, Khaperkheda, Saoner, Nagpur, Maharashtra, India Pincode - 441102
+            </p>
+          <p><i class="fas fa-map-marker-alt"></i> <b>Hyderabad Headquarter:</b>
+            Vazhra Nirman Pushpak, C Block 701, 500090, Hyderabad</p>
+          <p><i class="fas fa-envelope"></i> <b>Mail:</b>contact@suvidhafoundation.org</p>
+        </address>
+      </div>
+  
+      <!-- Column 4 - Social Links -->
+      <div class="footer-col">
+        <h4>Follow Us</h4>
+        <div class="social-links">
+          <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a href="https://in.linkedin.com/company/suvidha-foundation" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/suvidha_mahila_mandal/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+  
+    <div class="footer-bottom">
+      <p>&copy; 2025 Dronacharya School of AI. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Navigation Menu Script - EXACT COPY
+    (function () {
+      const nav = document.querySelector('nav');
+      const toggle = nav.querySelector('.menu-toggle');
+      const menu = nav.querySelector('#menu');
+
+      if (!toggle || !menu) {
+        console.error('Menu toggle or menu element not found');
+        return;
+      }
+
+      toggle.addEventListener('click', function (e) {
+        const isOpen = menu.classList.toggle('show');
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+
+      menu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          if (menu.classList.contains('show')) {
+            menu.classList.remove('show');
+            toggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+
+      document.addEventListener('click', (evt) => {
+        if (!nav.contains(evt.target) && menu.classList.contains('show')) {
+          menu.classList.remove('show');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      document.addEventListener('keydown', (evt) => {
+        if (evt.key === 'Escape' && menu.classList.contains('show')) {
+          menu.classList.remove('show');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+
+    // Profile Data - 100 Sample Profiles
+    const profilesData = [
+      // Page 1 - Profiles 1-50
+      { name: "Rahul Sharma", company: "Google", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Priya Verma", company: "Microsoft", image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Amit Patel", company: "Amazon", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Sneha Reddy", company: "Meta", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Vikram Singh", company: "Apple", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Ananya Das", company: "Netflix", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Karthik Iyer", company: "Tesla", image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Divya Nair", company: "Adobe", image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Arjun Mehta", company: "Uber", image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Riya Gupta", company: "Salesforce", image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Sanjay Kumar", company: "IBM", image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Kavya Krishnan", company: "Oracle", image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Rohan Bansal", company: "Flipkart", image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Neha Joshi", company: "Paytm", image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Aditya Rao", company: "Swiggy", image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Pooja Malhotra", company: "Zomato", image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Akash Desai", company: "Ola", image: "https://images.unsplash.com/photo-1507081323647-4d250478b919?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Ishita Saxena", company: "BYJU'S", image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Manish Agarwal", company: "Infosys", image: "https://images.unsplash.com/photo-1463453091185-61582044d556?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Shreya Kapoor", company: "Wipro", image: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Varun Chopra", company: "TCS", image: "https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Tanvi Shah", company: "HCL", image: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Nikhil Bajaj", company: "Tech Mahindra", image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Aarti Menon", company: "Cognizant", image: "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Rohit Bhatia", company: "Accenture", image: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Megha Pillai", company: "Deloitte", image: "https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Deepak Mishra", company: "PWC", image: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Ritika Bhardwaj", company: "EY", image: "https://images.unsplash.com/photo-1506863530036-1efeddceb993?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Siddharth Jain", company: "KPMG", image: "https://images.unsplash.com/photo-1552058544-f2b08422138a?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Anjali Sinha", company: "McKinsey", image: "https://images.unsplash.com/photo-1546967191-fdfb13ed6b1e?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Gaurav Khanna", company: "BCG", image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Sakshi Arora", company: "Bain & Company", image: "https://images.unsplash.com/photo-1554151228-14d9def656e4?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Harsh Tiwari", company: "Goldman Sachs", image: "https://images.unsplash.com/photo-1557862921-37829c790f19?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Nidhi Rajput", company: "Morgan Stanley", image: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Yash Goyal", company: "JP Morgan", image: "https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Tanya Bose", company: "Citibank", image: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Kunal Sethi", company: "HSBC", image: "https://images.unsplash.com/photo-1545167622-3a6ac756afa4?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Prachi Dubey", company: "Barclays", image: "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Abhinav Yadav", company: "Deutsche Bank", image: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Simran Kaur", company: "Standard Chartered", image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Vishal Pandey", company: "American Express", image: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Swati Chatterjee", company: "PayPal", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Rajat Malhotra", company: "Stripe", image: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Pallavi Dixit", company: "Razorpay", image: "https://images.unsplash.com/photo-1533973427779-4b8c2eb4c3cd?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Chirag Gupta", company: "PhonePe", image: "https://images.unsplash.com/photo-1558203728-00f45181dd84?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Kritika Jain", company: "Pine Labs", image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Aniket Sharma", company: "Freshworks", image: "https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Shivani Bansal", company: "Zoho", image: "https://images.unsplash.com/photo-1589156229687-496a31ad1d1f?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Mohit Verma", company: "InMobi", image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Aditi Kulkarni", company: "Dream11", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+
+      // Page 2 - Profiles 51-100
+      { name: "Karan Saxena", company: "CRED", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Madhuri Agarwal", company: "Meesho", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Tushar Mehta", company: "Razorpay", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Preeti Chauhan", company: "ShareChat", image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Aryan Kapoor", company: "Udaan", image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Bhavna Singh", company: "Unacademy", image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Neeraj Gupta", company: "Vedantu", image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Radhika Nair", company: "Upgrad", image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Sahil Bhatia", company: "Cars24", image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Urvi Deshmukh", company: "OfBusiness", image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Vivek Reddy", company: "Byjus", image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Zoya Khan", company: "Nykaa", image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Aman Tiwari", company: "Delhivery", image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Payal Srivastava", company: "Grofers", image: "https://images.unsplash.com/photo-1507081323647-4d250478b919?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Kartik Rao", company: "Urban Company", image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Diya Malhotra", company: "BigBasket", image: "https://images.unsplash.com/photo-1463453091185-61582044d556?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Pranav Joshi", company: "PolicyBazaar", image: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Esha Chatterjee", company: "Lenskart", image: "https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Farhan Ahmed", company: "Myntra", image: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Gayatri Menon", company: "Ajio", image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Hrithik Desai", company: "Snapdeal", image: "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Isha Patel", company: "Shopclues", image: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Jai Kumar", company: "Dunzo", image: "https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Kirti Sharma", company: "Rapido", image: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Lakshya Gupta", company: "Porter", image: "https://images.unsplash.com/photo-1506863530036-1efeddceb993?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Mira Iyer", company: "Blackbuck", image: "https://images.unsplash.com/photo-1552058544-f2b08422138a?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Nakul Verma", company: "Rivigo", image: "https://images.unsplash.com/photo-1546967191-fdfb13ed6b1e?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Omkar Pandey", company: "Licious", image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Parul Khanna", company: "Faasos", image: "https://images.unsplash.com/photo-1554151228-14d9def656e4?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Quinton D'Souza", company: "Box8", image: "https://images.unsplash.com/photo-1557862921-37829c790f19?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Rhea Kapoor", company: "Cure.fit", image: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Samar Singh", company: "HealthifyMe", image: "https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Trisha Malhotra", company: "Practo", image: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Uday Mishra", company: "1mg", image: "https://images.unsplash.com/photo-1545167622-3a6ac756afa4?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Vani Reddy", company: "PharmEasy", image: "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Wazir Ali", company: "Netmeds", image: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Xena Pillai", company: "Apollo 24x7", image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Yuvraj Sinha", company: "MakeMyTrip", image: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Zara Desai", company: "Goibibo", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Aarav Bansal", company: "Cleartrip", image: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Bhumi Shah", company: "Yatra", image: "https://images.unsplash.com/photo-1533973427779-4b8c2eb4c3cd?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Chetan Agarwal", company: "OYO Rooms", image: "https://images.unsplash.com/photo-1558203728-00f45181dd84?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Dhruv Jain", company: "Treebo", image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Elena Nair", company: "FabHotels", image: "https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Farida Khan", company: "Airbnb India", image: "https://images.unsplash.com/photo-1589156229687-496a31ad1d1f?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Gaurang Rao", company: "Housing.com", image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Hina Pillai", company: "NoBroker", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Ishaan Mehta", company: "MagicBricks", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" },
+      { name: "Jiya Chopra", company: "99acres", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop", linkedin: "https://linkedin.com" }
+    ];
+
+    // Pagination Variables
+    let currentPage = 1;
+    const profilesPerPage = 50;
+    const totalPages = Math.ceil(profilesData.length / profilesPerPage);
+
+    // Function to create a profile card
+    function createProfileCard(profile, index) {
+      const card = document.createElement('div');
+      card.className = 'profile-card';
+      card.style.animationDelay = `${(index % profilesPerPage) * 0.05}s`;
+      
+      card.innerHTML = `
+        <div class="profile-image-wrapper">
+          <img src="${profile.image}" alt="${profile.name}">
+          <a href="${profile.linkedin}" target="_blank" rel="noopener noreferrer" class="linkedin-overlay">
+            <div class="linkedin-icon">
+              <i class="fab fa-linkedin-in"></i>
+            </div>
+          </a>
+        </div>
+        <div class="profile-info">
+          <h3>${profile.name}</h3>
+          <p class="company">${profile.company}</p>
+        </div>
+      `;
+      
+      return card;
+    }
+
+    // Function to render profiles based on current page
+    function renderProfiles() {
+      const container = document.getElementById('profileContainer');
+      container.innerHTML = '';
+      
+      const startIndex = (currentPage - 1) * profilesPerPage;
+      const endIndex = Math.min(startIndex + profilesPerPage, profilesData.length);
+      
+      for (let i = startIndex; i < endIndex; i++) {
+        const card = createProfileCard(profilesData[i], i - startIndex);
+        container.appendChild(card);
+      }
+      
+      // Update pagination info
+      document.getElementById('currentPage').textContent = currentPage;
+      document.getElementById('totalPages').textContent = totalPages;
+      
+      // Update button states
+      document.getElementById('prevBtn').disabled = currentPage === 1;
+      document.getElementById('nextBtn').disabled = currentPage === totalPages;
+      
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Function to change page
+    function changePage(direction) {
+      const newPage = currentPage + direction;
+      if (newPage >= 1 && newPage <= totalPages) {
+        currentPage = newPage;
+        renderProfiles();
+      }
+    }
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', function() {
+      renderProfiles();
+    });
+  </script>
+</body>
+</html>
